@@ -9,8 +9,10 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Enterprise.DeliveryCompanyEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
 
 import Business.Role.DeliverManRole;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.regex.Pattern;
@@ -32,9 +34,14 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
     private DeliveryManDirectory custd;
     private JPanel userProcessContainer;
     private DeliveryCompanyEnterprise Denterprise;
-    public CreateDeliverymanJPanel(JPanel userProcessContainer,DeliveryCompanyEnterprise Denterprise) {
+    private Enterprise enterprise;
+    //private Organization organization;
+    
+    public CreateDeliverymanJPanel(JPanel userProcessContainer,DeliveryCompanyEnterprise Denterprise, Enterprise enterprise) {
         initComponents();
+        this.enterprise = enterprise;
         this.Denterprise = Denterprise;
+        //this.organization = organization;
         this.userProcessContainer = userProcessContainer;
         custd = Denterprise.getDeliveryManDirectory();
         
@@ -57,6 +64,10 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
         backbtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         telTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        passwordTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        usernameTextField = new javax.swing.JTextField();
 
         Header.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         Header.setForeground(new java.awt.Color(255, 102, 0));
@@ -90,44 +101,68 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
 
         telTextField.setToolTipText("unqiue numeric string ");
 
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setText("Password:");
+
+        passwordTextField.setToolTipText("unqiue numeric string ");
+
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel5.setText("Username:");
+
+        usernameTextField.setToolTipText("unqiue numeric string ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(168, 168, 168)
                 .addComponent(backbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(savebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Header))
-                .addGap(326, 326, 326))
+                .addGap(134, 134, 134)
+                .addComponent(Header)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3)))
-                .addGap(84, 84, 84)
+                .addContainerGap(321, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(300, 300, 300))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addGap(84, 84, 84)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usernameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(84, 84, 84)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(telTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(313, 313, 313))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(savebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(404, 404, 404))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(backbtn)
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)))
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(backbtn)
+                    .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -135,9 +170,9 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(telTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(savebtn)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addGap(84, 84, 84))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -145,11 +180,15 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
         
         String name = nameTextField.getText();
         String tel = telTextField.getText();
+        String username = usernameTextField.getText();
+        String pass = passwordTextField.getText();
         //name 不能是special char;  tel 只能是6位数字string      
         String ss = "[ _`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]|\n|\r|\t";
         Pattern p1 = Pattern.compile(ss);
         Pattern p2 =Pattern.compile("\\d{6}"); 
-        
+        Pattern p3 =Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[?!@#$%&*]).[A-Za-z\\d?!@#$%&*]{6,}"); 
+        ////No: 所有employee里 不重名
+        //同role unique name
         for(DeliveryMan u:custd.getdList()){
             if(name.equals(u.getName())){
                 JOptionPane.showMessageDialog(null, "This Delivery Man name has been used","Warning", JOptionPane.WARNING_MESSAGE);
@@ -157,20 +196,36 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
                 return;
             }
         }
+        //在这个enterprise里:all useraccount unique username 在这个enterprise里
+        for(UserAccount u: enterprise.getUserAccountDirectory().getUserAccountList()){
+            if(username.equals(u.getUsername())){
+                JOptionPane.showMessageDialog(null, "This username has been used","Warning", JOptionPane.WARNING_MESSAGE);
+                username = ""; //represent the same 
+                return;
+            }
+        }
+        
         if(p1.matcher(name).matches()){
-            JOptionPane.showMessageDialog(null, "Please input user name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
-        }else if(name.equals("") || tel.equals("") ){ // if user don't input any of the text field
+            JOptionPane.showMessageDialog(null, "Please input the name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(name.equals("") || tel.equals("") ||username.equals("") || pass.equals("") ){ // if user don't input any of the text field
             JOptionPane.showMessageDialog(null, "Please add a Delivery Man with all of these information.","Warning", JOptionPane.WARNING_MESSAGE);
         }else if( !p2.matcher(tel).matches()){
             JOptionPane.showMessageDialog(null, "Please input telephone number with 6 digits.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(p1.matcher(username).matches()){
+            JOptionPane.showMessageDialog(null, "Please input user name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if( !p3.matcher(pass).matches()){
+            JOptionPane.showMessageDialog(null, "Please input password at least 6 digits and contain at least one letter, one digit and one special character ?!@#$%&*" ,"Warning", JOptionPane.WARNING_MESSAGE);
         }else{
-            DeliveryMan a = new DeliveryMan(name,tel);
+            DeliveryMan a = new DeliveryMan(name,tel,username,pass);
             custd.addDeliveryMan(a);
-            Denterprise.getUserAccountDirectory().createUserAccount(name,tel, a, new DeliverManRole());
-        
+            Denterprise.getUserAccountDirectory().createUserAccount(username,pass, a, new DeliverManRole());
+            Denterprise.getEmployeeDirectory().createEmployee(name);
+        //new delivery man add to deliveryman dir, useraccount,employee (organization)
             JOptionPane.showMessageDialog(null,"Delivery Man has added successfully!");
             telTextField.setText("");
             nameTextField.setText("");
+            usernameTextField.setText("");
+            passwordTextField.setText("");
         }
 
 
@@ -196,8 +251,12 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
     private javax.swing.JButton backbtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JTextField passwordTextField;
     private javax.swing.JButton savebtn;
     private javax.swing.JTextField telTextField;
+    private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.DeliveryMan;
+package Business.CustomerManager;
 
+import Business.DeliveryMan.*;
 import Business.Employee.Employee;
 
 /**
  *
  * @author harold
  */
-public class DeliveryMan extends Employee{
+public class CustomerManager extends Employee{
     private String name;
-    private String tel;
+    //private String tel;
     private String username;
     private String password;
     
-    public DeliveryMan(String name, String tel,String username, String password) {
+    public CustomerManager(String name, String username, String password) {
         this.name = name;
-        this.tel = tel;
+        //this.tel = tel;
         this.password = password;
         this.username = username;
     }
@@ -40,22 +41,14 @@ public class DeliveryMan extends Employee{
         this.username = username;
     }
 
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
+    
 
    
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
     
-    @Override
     public String getName() {
         return name;
     }

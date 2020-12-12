@@ -2,14 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.DeliveryManagerRole;
+package userinterface.PlatformManagerRole;
 
+import Business.CustomerManager.CustomerManager;
+import Business.CustomerManager.CustomerManagerDirectory;
+import userinterface.DeliveryManagerRole.*;
 import Business.DeliveryMan.DeliveryMan;
 import Business.DeliveryMan.DeliveryManDirectory;
 import userinterface.DeliveryManRole.*;
 import Business.EcoSystem;
 import Business.Enterprise.DeliveryCompanyEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.PlatformEnterprise;
 import Business.Organization.DeliveryCompanyOrganization;
 import Business.Organization.Organization;
 
@@ -25,32 +29,31 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author raunak
  */
-public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
+public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private UserAccount user;
     private Enterprise enterprise;
     //private Organization organization;
-    private DeliveryManDirectory custD;
-    private DeliveryCompanyEnterprise Denterprise;
+    private CustomerManagerDirectory custD;
+    private PlatformEnterprise Denterprise;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public DeliveryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise ) {
+    public PlatformManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise ) {
         initComponents();
         this.enterprise = enterprise;
         this.userProcessContainer = userProcessContainer;
         this.user = account;
         //this.organization =  organization;
-        Denterprise = new DeliveryCompanyEnterprise(enterprise.getName(), new DeliveryManDirectory());
+        Denterprise = new PlatformEnterprise(enterprise.getName(), new CustomerManagerDirectory());
+        custD = Denterprise.getCustomerManagerDirectory();
         
-//in Delivery manager, set some delivery man in advance
-        custD = Denterprise.getDeliveryManDirectory();
-        custD.addDeliveryMan(new DeliveryMan("Elem","1365113","deliveryman1","deliveryman1!"));
-        custD.addDeliveryMan(new DeliveryMan("Meituan","1365118","deliveryman2","deliveryman2!"));
+        //先设一个customer manager
+        custD = Denterprise.getCustomerManagerDirectory();
+        custD.createCustomerManager(new CustomerManager("Elem","deliveryman1","deliveryman1!"));
         
-       
         valueLabel.setText(enterprise.getName());
         
     }
@@ -65,54 +68,39 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        assignDeliverymanJButton = new javax.swing.JButton();
-        manageDeliverymanJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        manageDeliverymanJButton = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        assignDeliverymanJButton.setText("Assignment of delivery man");
-        assignDeliverymanJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignDeliverymanJButtonActionPerformed(evt);
-            }
-        });
-        add(assignDeliverymanJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 200, -1));
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        enterpriseLabel.setText("Platform:");
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 200, 30));
 
-        manageDeliverymanJButton.setText("Manage delivery man");
+        valueLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        valueLabel.setText("<value>");
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 130, -1));
+
+        manageDeliverymanJButton.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        manageDeliverymanJButton.setText("Customer Service");
         manageDeliverymanJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageDeliverymanJButtonActionPerformed(evt);
             }
         });
         add(manageDeliverymanJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
-
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Delivery Company:");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 200, 30));
-
-        valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void assignDeliverymanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDeliverymanJButtonActionPerformed
-        assignDeliverJPanel p  = new assignDeliverJPanel(userProcessContainer,Denterprise,user);
-        userProcessContainer.add("ADJPanel",p);
-        CardLayout layout =  (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_assignDeliverymanJButtonActionPerformed
 
     private void manageDeliverymanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDeliverymanJButtonActionPerformed
         //system.getWorkQueue()
-        manageDeliverymanJPanel p  = new manageDeliverymanJPanel(userProcessContainer,Denterprise,enterprise);
-        userProcessContainer.add("MOJPanel",p);
+        CustomerServiceJPanel p  = new CustomerServiceJPanel(userProcessContainer,Denterprise,enterprise);
+        userProcessContainer.add("CSJPanel",p);
         CardLayout layout =  (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageDeliverymanJButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignDeliverymanJButton;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JButton manageDeliverymanJButton;
     private javax.swing.JLabel valueLabel;

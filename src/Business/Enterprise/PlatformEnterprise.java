@@ -5,7 +5,7 @@
  */
 package Business.Enterprise;
 
-import Business.DeliveryMan.DeliveryManDirectory;
+import Business.CustomerManager.CustomerManagerDirectory;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -13,15 +13,15 @@ import java.util.ArrayList;
  *
  * @author MyPC1
  */
-public class DeliveryCompanyEnterprise extends Enterprise {
-    private DeliveryManDirectory deliveryManDirectory;
+public class PlatformEnterprise extends Enterprise {
+    private CustomerManagerDirectory deliveryManDirectory;
     
-    public DeliveryCompanyEnterprise(String name,DeliveryManDirectory deliveryManDirectory){
+    public PlatformEnterprise(String name,CustomerManagerDirectory deliveryManDirectory){
         super(name,EnterpriseType.DeliveryCompany);
         this.deliveryManDirectory = deliveryManDirectory;
     }
 
-    public DeliveryManDirectory getDeliveryManDirectory() {
+    public CustomerManagerDirectory getCustomerManagerDirectory() {
         return deliveryManDirectory;
     }
     
