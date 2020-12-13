@@ -33,18 +33,19 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private DeliveryManDirectory custD;
-    private DeliveryCompanyEnterprise Denterprise;
+    
     //private Organization organization;
     //private UserAccount user;
     private Enterprise enterprise;
-    
-    public manageDeliverymanJPanel(JPanel userProcessContainer,DeliveryCompanyEnterprise Denterprise,Enterprise enterprise) {
+    private DeliveryCompanyEnterprise Denterprise;
+    public manageDeliverymanJPanel(JPanel userProcessContainer,Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.Denterprise = Denterprise;
+        
         //this.organization = organization;
         //this.user = user;
         this.enterprise = enterprise;
+        Denterprise = (DeliveryCompanyEnterprise)enterprise;
         custD = Denterprise.getDeliveryManDirectory();
         populateTable();
     }
@@ -54,8 +55,9 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         dtm.setRowCount(0);
         for(DeliveryMan a : custD.getdList()){
             Object row[] = new Object[3];
-            row[0] = a.getUsername();
-            row[1] = a; 
+            row[0] = a; 
+            row[1] = a.getName();
+            
             row[2] = a.getTel();
             
             
@@ -78,7 +80,7 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         createCbtn = new javax.swing.JButton();
         backbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        deleteBtn1 = new javax.swing.JButton();
+        viewBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -106,7 +108,6 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
@@ -138,11 +139,11 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("Organization: Deliveryman Management");
 
-        deleteBtn1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        deleteBtn1.setText("View Details");
-        deleteBtn1.addActionListener(new java.awt.event.ActionListener() {
+        viewBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        viewBtn.setText("View Details");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtn1ActionPerformed(evt);
+                viewBtnActionPerformed(evt);
             }
         });
 
@@ -160,30 +161,29 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
                         .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(247, 247, 247)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(deleteBtn1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(viewBtn)
+                                        .addGap(54, 54, 54)
                                         .addComponent(deleteBtn)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(215, 215, 215)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(createCbtn, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(276, Short.MAX_VALUE))
+                            .addComponent(createCbtn, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel1)))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(backbtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel1)))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(backbtn)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -193,11 +193,11 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteBtn1)
+                    .addComponent(viewBtn)
                     .addComponent(deleteBtn))
                 .addGap(30, 30, 30)
                 .addComponent(createCbtn)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -209,7 +209,8 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this DeliveryMan?","Warning",JOptionPane.YES_NO_OPTION);
             //return int value
             if (dialogResult == JOptionPane.YES_OPTION){
-                Denterprise.getUserAccountDirectory().removeUserAccount(a.toString());
+                enterprise.getEmployeeDirectory().deleteEmployee(a);
+                enterprise.getUserAccountDirectory().removeUserAccount(a.getUsername());
                 
                 custD.deleteDeliveryMan(a);
                 JOptionPane.showMessageDialog(null,"This DeliveryMan has been deleted.");
@@ -224,7 +225,7 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
 
     private void createCbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCbtnActionPerformed
         
-        CreateDeliverymanJPanel createpanel = new CreateDeliverymanJPanel(userProcessContainer,Denterprise,enterprise); //无DeliveryManDirectory？
+        CreateDeliverymanJPanel createpanel = new CreateDeliverymanJPanel(userProcessContainer,enterprise); //无DeliveryManDirectory？
         userProcessContainer.add("CreateRJPanel" ,createpanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -236,12 +237,12 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backbtnActionPerformed
 
-    private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         int selectedrow = jTable1.getSelectedRow(); // get selected row number
         if(selectedrow >= 0){
             DeliveryMan a = (DeliveryMan)jTable1.getValueAt(selectedrow, 0);
 
-            ViewDeliverymanJPanel viewpanel = new ViewDeliverymanJPanel(userProcessContainer,a,Denterprise,custD,enterprise);
+            ViewDeliverymanJPanel viewpanel = new ViewDeliverymanJPanel(userProcessContainer,a,custD,enterprise);
             userProcessContainer.add("ViewDMJPanel" ,viewpanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -251,17 +252,17 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select any row.","Warning",JOptionPane.WARNING_MESSAGE);
         }
 
-    }//GEN-LAST:event_deleteBtn1ActionPerformed
+    }//GEN-LAST:event_viewBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backbtn;
     private javax.swing.JButton createCbtn;
     private javax.swing.JButton deleteBtn;
-    private javax.swing.JButton deleteBtn1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

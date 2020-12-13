@@ -9,7 +9,7 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Enterprise.DeliveryCompanyEnterprise;
 import Business.Enterprise.Enterprise;
-import Business.Organization.DeliveryCompanyOrganization;
+import Business.Organization.DeliveryOrganization;
 import Business.Organization.Organization;
 
 import Business.UserAccount.UserAccount;
@@ -33,10 +33,10 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     
-    private DeliveryCompanyEnterprise Denterprise;
+    private Enterprise Denterprise;
     
     
-    public assignDeliverJPanel(JPanel userProcessContainer, DeliveryCompanyEnterprise Denterprise,UserAccount userAccount) {
+    public assignDeliverJPanel(JPanel userProcessContainer, Enterprise Denterprise,UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.Denterprise = Denterprise;
@@ -44,9 +44,9 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
         this.userAccount = userAccount;
         
         displayTable();
-        
+        DeliveryCompanyEnterprise de = (DeliveryCompanyEnterprise)Denterprise;
         jComboBox1.removeAllItems();
-        for (DeliveryMan d : Denterprise.getDeliveryManDirectory().getdList()) {
+        for (DeliveryMan d : de.getDeliveryManDirectory().getdList()) {
             jComboBox1.addItem(d.toString());
         }
     }
@@ -147,8 +147,8 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnAssign)))
                         .addGap(116, 116, 116))

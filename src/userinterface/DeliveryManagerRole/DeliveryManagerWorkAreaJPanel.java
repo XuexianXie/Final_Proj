@@ -10,7 +10,7 @@ import userinterface.DeliveryManRole.*;
 import Business.EcoSystem;
 import Business.Enterprise.DeliveryCompanyEnterprise;
 import Business.Enterprise.Enterprise;
-import Business.Organization.DeliveryCompanyOrganization;
+import Business.Organization.DeliveryOrganization;
 import Business.Organization.Organization;
 
 import Business.UserAccount.UserAccount;
@@ -32,7 +32,7 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     //private Organization organization;
     private DeliveryManDirectory custD;
-    private DeliveryCompanyEnterprise Denterprise;
+    //private DeliveryCompanyEnterprise Denterprise;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
@@ -43,13 +43,8 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.user = account;
         //this.organization =  organization;
-        Denterprise = new DeliveryCompanyEnterprise(enterprise.getName(), new DeliveryManDirectory());
-        
-//in Delivery manager, set some delivery man in advance
-        custD = Denterprise.getDeliveryManDirectory();
-        custD.addDeliveryMan(new DeliveryMan("Elem","1365113","deliveryman1","deliveryman1!"));
-        custD.addDeliveryMan(new DeliveryMan("Meituan","1365118","deliveryman2","deliveryman2!"));
-        
+        //Denterprise =(DeliveryCompanyEnterprise)enterprise;
+     
        
         valueLabel.setText(enterprise.getName());
         
@@ -97,7 +92,7 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignDeliverymanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDeliverymanJButtonActionPerformed
-        assignDeliverJPanel p  = new assignDeliverJPanel(userProcessContainer,Denterprise,user);
+        assignDeliverJPanel p  = new assignDeliverJPanel(userProcessContainer,enterprise,user); //user: manager
         userProcessContainer.add("ADJPanel",p);
         CardLayout layout =  (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -105,7 +100,7 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageDeliverymanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDeliverymanJButtonActionPerformed
         //system.getWorkQueue()
-        manageDeliverymanJPanel p  = new manageDeliverymanJPanel(userProcessContainer,Denterprise,enterprise);
+        manageDeliverymanJPanel p  = new manageDeliverymanJPanel(userProcessContainer,enterprise);//organization
         userProcessContainer.add("MOJPanel",p);
         CardLayout layout =  (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

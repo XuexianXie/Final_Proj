@@ -11,6 +11,8 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.PlatformEnterprise;
 import Business.Role.CustomerManagerRole;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,10 +30,10 @@ public class CreateCustomerManagerJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateCustomerManagerJPanel
      */
-    public CreateCustomerManagerJPanel(JPanel userProcessContainer,PlatformEnterprise Denterprise, Enterprise enterprise)  {
+    public CreateCustomerManagerJPanel(JPanel userProcessContainer,Enterprise enterprise)  {
         initComponents();
         this.enterprise = enterprise;
-        this.Denterprise = Denterprise;
+        Denterprise = (PlatformEnterprise)enterprise;
         //this.organization = organization;
         this.userProcessContainer = userProcessContainer;
         custd = Denterprise.getCustomerManagerDirectory();
@@ -55,6 +57,7 @@ public class CreateCustomerManagerJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         savebtn = new javax.swing.JButton();
+        backbtn = new javax.swing.JButton();
 
         userTextField.setToolTipText("unqiue numeric string ");
 
@@ -83,12 +86,22 @@ public class CreateCustomerManagerJPanel extends javax.swing.JPanel {
             }
         });
 
+        backbtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        backbtn.setText("Back");
+        backbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(330, Short.MAX_VALUE)
+                .addGap(117, 117, 117)
+                .addComponent(backbtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -113,9 +126,14 @@ public class CreateCustomerManagerJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(backbtn)))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -184,8 +202,22 @@ public class CreateCustomerManagerJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_savebtnActionPerformed
 
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        //[!]the last component in the container, new and refresh table
+        CustomerServiceJPanel manage = (CustomerServiceJPanel) component;
+        manage.populateTable();
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        // parent container layout is passed to previous
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backbtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backbtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

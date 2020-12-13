@@ -34,11 +34,12 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
     private DeliveryManDirectory custD;
     private Enterprise enterprise;
     
-    public ViewDeliverymanJPanel(JPanel UserProcessContainer,DeliveryMan a, DeliveryCompanyEnterprise Denterprise,DeliveryManDirectory custD,Enterprise enterprise) {
+    public ViewDeliverymanJPanel(JPanel UserProcessContainer,DeliveryMan a, DeliveryManDirectory custD,Enterprise enterprise) {
         initComponents();
         this.a = a;
         this.enterprise = enterprise;
-        this.Denterprise = Denterprise;
+        //this.Denterprise = Denterprise;
+        DeliveryCompanyEnterprise Denterprise = (DeliveryCompanyEnterprise)enterprise;
         this.custD = custD;
         this.userProcessContainer = UserProcessContainer;
         userTextField.setText(a.getUsername());
@@ -227,14 +228,17 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
         Pattern p1 = Pattern.compile(ss);
         Pattern p2 =Pattern.compile("\\d{6}");
         Pattern p3 = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[?!@#$%&*]).[A-Za-z\\d?!@#$%&*]{6,}");  
-        
-        for(DeliveryMan u:custD.getdList()){
-            if(name.equals(u.getName())){
+        if(!name.equals(a.getName())){
+            for(DeliveryMan u:custD.getdList()){
+                if(name.equals(u.getName())){
                 JOptionPane.showMessageDialog(null, "This Delivery Man name has been used","Warning", JOptionPane.WARNING_MESSAGE);
                 name = ""; //represent the same 
                 return;
+                }
             }
         }
+        
+        if(!user.equals(a.getUsername())){
         //在这个enterprise里:all useraccount unique username 在这个enterprise里
         for(UserAccount u: enterprise.getUserAccountDirectory().getUserAccountList()){
             if(user.equals(u.getUsername())){
@@ -243,7 +247,7 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
                 return;
             }
         }
-        
+        }
         if(p1.matcher(name).matches()){
             JOptionPane.showMessageDialog(null, "Please input the name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
         }else if(name.equals("") || tel.equals("") ||user.equals("")||pass.equals("")){ // if user don't input any of the text field
@@ -259,8 +263,8 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
             a.setTel(tel);
             a.setPassword(pass);
             a.setUsername(user);
-            
-            Denterprise.getUserAccountDirectory().updateUserAccount(user, pass);
+            enterprise.getEmployeeDirectory().updateEmployee(a, name);
+            enterprise.getUserAccountDirectory().updateUserAccount(user, pass);
             savebtn.setEnabled(false);
             updatebtn.setEnabled(true);
             JOptionPane.showMessageDialog(null, "The delivery man information updated successfully!");      

@@ -37,12 +37,12 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     
     
-    public ViewCustomerManagerJPanel(JPanel UserProcessContainer,CustomerManager a, PlatformEnterprise Denterprise,CustomerManagerDirectory custD,Enterprise enterprise) {
+    public ViewCustomerManagerJPanel(JPanel UserProcessContainer,CustomerManager a,CustomerManagerDirectory custD,Enterprise enterprise) {
 
         initComponents();
         this.a = a;
         this.enterprise = enterprise;
-        this.Denterprise = Denterprise;
+        Denterprise =(PlatformEnterprise)enterprise;
         this.custD = custD;
         this.userProcessContainer = UserProcessContainer;
         userTextField.setText(a.getUsername());
@@ -201,6 +201,7 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
         Pattern p1 = Pattern.compile(ss);
         Pattern p2 = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[?!@#$%&*]).[A-Za-z\\d?!@#$%&*]{6,}");  
         
+        if(!name.equals(a.getName())){
         for(CustomerManager u:custD.getcList()){
             if(name.equals(u.getName())){
                 JOptionPane.showMessageDialog(null, "This Delivery Man name has been used","Warning", JOptionPane.WARNING_MESSAGE);
@@ -208,6 +209,9 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
                 return;
             }
         }
+        }
+        
+        if(!user.equals(a.getUsername())){
         //在这个enterprise里:all useraccount unique username 在这个enterprise里
         for(UserAccount u: enterprise.getUserAccountDirectory().getUserAccountList()){
             if(user.equals(u.getUsername())){
@@ -215,6 +219,7 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
                 user = ""; //represent the same 
                 return;
             }
+        }
         }
         
         if(p1.matcher(name).matches()){
@@ -229,7 +234,8 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
             a.setName(name);
             a.setPassword(pass);
             a.setUsername(user);
-            Denterprise.getUserAccountDirectory().updateUserAccount(user,pass);
+            enterprise.getEmployeeDirectory().updateEmployee(a, name);
+            enterprise.getUserAccountDirectory().updateUserAccount(user,pass);
             savebtn.setEnabled(false);
             updatebtn.setEnabled(true);
             JOptionPane.showMessageDialog(null, "The customer manager information updated successfully!");      

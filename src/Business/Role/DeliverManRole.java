@@ -7,7 +7,7 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Organization.DeliveryCompanyOrganization;
+import Business.Organization.DeliveryOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -21,7 +21,9 @@ public class DeliverManRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new DeliveryManWorkAreaJPanel(userProcessContainer, account, (DeliveryCompanyOrganization)organization, enterprise);
+        return new DeliveryManWorkAreaJPanel(userProcessContainer, account, enterprise);
+        //(DeliveryCompanyOrganization)organization, 
+        
     }
     
     

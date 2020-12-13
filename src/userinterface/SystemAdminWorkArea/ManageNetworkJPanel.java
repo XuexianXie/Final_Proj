@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +42,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for (Network network : system.getNetworkList()) {
             Object[] row = new Object[1];
-            row[0] = network.getName();
+            row[0] = network;
             model.addRow(row);
         }
     }
@@ -128,14 +129,14 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(131, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(removeJButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeJButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(submitJButton)
-                        .addGap(18, 18, 18)
+                        .addGap(40, 40, 40)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(169, 169, 169))
         );
         layout.setVerticalGroup(
@@ -145,21 +146,34 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 .addComponent(backJButton)
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(removeJButton)
-                .addGap(27, 27, 27)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(submitJButton)
-                    .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(150, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
         String name = nameJTextField.getText();
-
+        if (name == null) {
+            JOptionPane.showMessageDialog(null, "input the name information to add a network.");
+            return;
+        }
+        String ss = "[ _`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]|\n|\r|\t";
+        Pattern p1 = Pattern.compile(ss);
+        for (Network network : system.getNetworkList()) {
+            if(network.getName().equals(name)){
+                JOptionPane.showMessageDialog(null, "This network name has been used","Warning", JOptionPane.WARNING_MESSAGE);
+                name = ""; //represent the same 
+                return;
+            }
+        }
         Network network = system.createAndAddNetwork();
         network.setName(name);
         network.getEnterpriseDirectory().createAndAddEnterprise(name+"_platform", Enterprise.EnterpriseType.Platform);
@@ -181,14 +195,22 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         int selectedrow = networkJTable.getSelectedRow(); // get selected row number
         if(selectedrow >= 0){
             Network a = (Network)networkJTable.getValueAt(selectedrow, 0);
-
+            //why cannot?
+            
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this Network?","Warning",JOptionPane.YES_NO_OPTION);
             //return int value
             if (dialogResult == JOptionPane.YES_OPTION){
                 //ecosystem.getUserAccountDirectory().removeUserAccount(a.toString());
                 system.deleteNetwork(a);
+                /* 
+                for (Network network : system.getNetworkList()) {
+                    if(network.getName().equals(networkJTable.getValueAt(selectedrow, 0))){
+                        system.deleteNetwork(network);
+                    }
+                }*/
+               
                 
-                JOptionPane.showMessageDialog(null,"This DeliveryMan has been deleted.");
+                JOptionPane.showMessageDialog(null,"This Network has been deleted.");
                 populateNetworkTable();
                 
             }

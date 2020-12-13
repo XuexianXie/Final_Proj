@@ -52,11 +52,14 @@ public class UserAccountDirectory {
     
     public void removeUserAccount(String username){
         for (UserAccount ua : userAccountList){
-            if (ua.getUsername().equals(username))
-            userAccountList.remove(ua);
+            if (ua.getUsername().equals(username)){
+                userAccountList.remove(ua);
+            }    
         }
        
     }
+    
+    
     
     public void updateUserAccount(String username, String pass){
         for (UserAccount ua : userAccountList){

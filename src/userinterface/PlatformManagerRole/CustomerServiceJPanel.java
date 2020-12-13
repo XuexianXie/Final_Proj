@@ -29,13 +29,13 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
     private CustomerManagerDirectory custD;
     private PlatformEnterprise Denterprise;
     
-    public CustomerServiceJPanel(JPanel userProcessContainer, PlatformEnterprise Denterprise,Enterprise enterprise ) {
+    public CustomerServiceJPanel(JPanel userProcessContainer, Enterprise enterprise ) {
         initComponents();
         this.enterprise = enterprise;
         this.userProcessContainer = userProcessContainer;
         //this.user = account;
         //this.organization =  organization;
-        this.Denterprise = Denterprise;
+        Denterprise = (PlatformEnterprise)enterprise;
         custD = Denterprise.getCustomerManagerDirectory();
         populateTable();
         
@@ -47,7 +47,7 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         for(CustomerManager a : custD.getcList()){
             Object row[] = new Object[2];
             row[0] = a.getUsername();
-            row[1] = a; 
+            row[1] = a;  //a :name
             
             dtm.addRow(row);
         }
@@ -64,7 +64,7 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        updateBtn = new javax.swing.JButton();
+        viewBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         deleteBtn = new javax.swing.JButton();
         createCbtn = new javax.swing.JButton();
@@ -96,11 +96,11 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        updateBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        updateBtn.setText("View Details");
-        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+        viewBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        viewBtn.setText("View Details");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtnActionPerformed(evt);
+                viewBtnActionPerformed(evt);
             }
         });
 
@@ -147,39 +147,40 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
                 .addContainerGap(151, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(60, 60, 60)
-                                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(createCbtn))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(137, 137, 137)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(createCbtn))
                         .addGap(263, 263, 263))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(289, 289, 289))))
+                        .addGap(289, 289, 289))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(216, 216, 216))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addComponent(backbtn)))
-                .addGap(10, 10, 10)
+                        .addComponent(backbtn)
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(32, 32, 32)))
                 .addComponent(jLabel1)
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(updateBtn)
+                    .addComponent(viewBtn)
                     .addComponent(deleteBtn))
                 .addGap(33, 33, 33)
                 .addComponent(createCbtn)
@@ -187,12 +188,12 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         int selectedrow = jTable1.getSelectedRow(); // get selected row number
         if(selectedrow >= 0){
-            CustomerManager a = (CustomerManager)jTable1.getValueAt(selectedrow, 0);
+            CustomerManager a = (CustomerManager)jTable1.getValueAt(selectedrow, 1);
 
-            ViewCustomerManagerJPanel viewpanel = new ViewCustomerManagerJPanel(userProcessContainer,a,Denterprise,custD,enterprise);
+            ViewCustomerManagerJPanel viewpanel = new ViewCustomerManagerJPanel(userProcessContainer,a,custD,enterprise);
             userProcessContainer.add("ViewCMJPanel" ,viewpanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -200,7 +201,7 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "Please select any row.","Warning",JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_updateBtnActionPerformed
+    }//GEN-LAST:event_viewBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int selectedrow = jTable1.getSelectedRow(); // get selected row number
@@ -210,7 +211,8 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this Customer Manager?","Warning",JOptionPane.YES_NO_OPTION);
             //return int value
             if (dialogResult == JOptionPane.YES_OPTION){
-                Denterprise.getUserAccountDirectory().removeUserAccount(a.toString());
+                Denterprise.getUserAccountDirectory().removeUserAccount(a.getUsername());
+                Denterprise.getEmployeeDirectory().deleteEmployee(a);
 
                 custD.deleteCustomerManager(a);
                 JOptionPane.showMessageDialog(null,"This CustomerManager has been deleted.");
@@ -225,7 +227,7 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
 
     private void createCbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCbtnActionPerformed
 
-        CreateCustomerManagerJPanel createpanel = new CreateCustomerManagerJPanel(userProcessContainer,Denterprise,enterprise); //无DeliveryManDirectory？
+        CreateCustomerManagerJPanel createpanel = new CreateCustomerManagerJPanel(userProcessContainer,enterprise); //无DeliveryManDirectory？
         userProcessContainer.add("CreateCMPanel" ,createpanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -246,6 +248,6 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton updateBtn;
+    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

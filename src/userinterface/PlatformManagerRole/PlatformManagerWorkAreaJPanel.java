@@ -11,10 +11,11 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.DeliveryMan.DeliveryManDirectory;
 import userinterface.DeliveryManRole.*;
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.DeliveryCompanyEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.PlatformEnterprise;
-import Business.Organization.DeliveryCompanyOrganization;
+import Business.Organization.DeliveryOrganization;
 import Business.Organization.Organization;
 
 import Business.UserAccount.UserAccount;
@@ -36,7 +37,7 @@ public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     //private Organization organization;
     private CustomerManagerDirectory custD;
-    private PlatformEnterprise Denterprise;
+    //private PlatformEnterprise Denterprise;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
@@ -47,14 +48,12 @@ public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.user = account;
         //this.organization =  organization;
-        Denterprise = new PlatformEnterprise(enterprise.getName(), new CustomerManagerDirectory());
-        custD = Denterprise.getCustomerManagerDirectory();
-        
-        //先设一个customer manager
-        custD = Denterprise.getCustomerManagerDirectory();
-        custD.createCustomerManager(new CustomerManager("Elem","deliveryman1","deliveryman1!"));
-        
+        //Denterprise = (PlatformEnterprise)enterprise;
+        //for(Employee e: enterprise.getEmployeeDirectory().getEmployeeList() ){
+          //  if(e.get)
+        //}
         valueLabel.setText(enterprise.getName());
+        //valueLabel1.setText(user.getName());
         
     }
     
@@ -80,7 +79,7 @@ public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 130, -1));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 210, -1));
 
         manageDeliverymanJButton.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         manageDeliverymanJButton.setText("Customer Service");
@@ -94,7 +93,7 @@ public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageDeliverymanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDeliverymanJButtonActionPerformed
         //system.getWorkQueue()
-        CustomerServiceJPanel p  = new CustomerServiceJPanel(userProcessContainer,Denterprise,enterprise);
+        CustomerServiceJPanel p  = new CustomerServiceJPanel(userProcessContainer,enterprise);
         userProcessContainer.add("CSJPanel",p);
         CardLayout layout =  (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

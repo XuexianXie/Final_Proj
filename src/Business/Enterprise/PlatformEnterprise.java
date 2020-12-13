@@ -17,7 +17,7 @@ public class PlatformEnterprise extends Enterprise {
     private CustomerManagerDirectory deliveryManDirectory;
     
     public PlatformEnterprise(String name,CustomerManagerDirectory deliveryManDirectory){
-        super(name,EnterpriseType.DeliveryCompany);
+        super(name,EnterpriseType.Platform);
         this.deliveryManDirectory = deliveryManDirectory;
     }
 

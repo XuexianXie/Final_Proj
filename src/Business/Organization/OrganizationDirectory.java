@@ -25,8 +25,8 @@ public class OrganizationDirectory {
     
     public Organization createOrganization(Type type){
         Organization organization = null;
-        if (type.getValue().equals(Type.DeliveryCompany.getValue())){
-            organization = new DeliveryCompanyOrganization();
+        if (type.getValue().equals(Type.Delivery.getValue())){
+            organization = new DeliveryOrganization();
             organizationList.add(organization);
         }
         

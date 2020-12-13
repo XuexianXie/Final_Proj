@@ -5,6 +5,7 @@
  */
 package Business.Enterprise;
 
+import Business.CustomerManager.CustomerManagerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Organization.OrganizationDirectory;
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class EnterpriseDirectory {
         
         if(type==Enterprise.EnterpriseType.DeliveryCompany){
             enterprise=new DeliveryCompanyEnterprise(name,new DeliveryManDirectory());
+            enterpriseList.add(enterprise);
+        }
+        if(type==Enterprise.EnterpriseType.Platform){
+            enterprise=new PlatformEnterprise(name,new CustomerManagerDirectory());
             enterpriseList.add(enterprise);
         }
         

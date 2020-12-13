@@ -37,10 +37,10 @@ public class CreateDeliverymanJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     //private Organization organization;
     
-    public CreateDeliverymanJPanel(JPanel userProcessContainer,DeliveryCompanyEnterprise Denterprise, Enterprise enterprise) {
+    public CreateDeliverymanJPanel(JPanel userProcessContainer, Enterprise enterprise) {
         initComponents();
         this.enterprise = enterprise;
-        this.Denterprise = Denterprise;
+        this.Denterprise = (DeliveryCompanyEnterprise)enterprise;
         //this.organization = organization;
         this.userProcessContainer = userProcessContainer;
         custd = Denterprise.getDeliveryManDirectory();

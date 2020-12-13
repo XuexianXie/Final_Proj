@@ -5,7 +5,10 @@
 package userinterface.DeliveryManRole;
 
 
+import Business.DeliveryMan.DeliveryMan;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Employee.Employee;
+import Business.Enterprise.DeliveryCompanyEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 
@@ -24,28 +27,33 @@ import javax.swing.table.DefaultTableModel;
 public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    //private Enterprise enterprise;;
+    private Enterprise enterprise;
+    private DeliveryCompanyEnterprise Denterprise;
     private UserAccount userAccount;
-    private Organization organization;
+    private DeliveryManDirectory dd;
+    //private Organization organization;
     
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public DeliveryManWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise ) {
+    public DeliveryManWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,  Enterprise enterprise ) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
-        //this.enterprise = enterprise;
-        this.organization = organization;
+        this.enterprise = enterprise;
+        Denterprise = (DeliveryCompanyEnterprise)enterprise;
+        dd = Denterprise.getDeliveryManDirectory();
+        //this.organization = organization;
+        //不显示deliveryman name
+        for(DeliveryMan dm: dd.getdList()){
+            if(dm.getUsername().equals(userAccount.getUsername())){
+                valueLabel.setText(dm.getName());
+            }
+         }
         
-        for(Employee e:organization.getEmployeeDirectory().getEmployeeList()){
-            
-        
-        }
-        
-        
+        //valueLabel.setText(userAccount.get);
         populateTable();
     }
     
