@@ -37,7 +37,6 @@ public class CostumeOrderMngWorkAreaJPanel extends javax.swing.JPanel {
     public WorkQueue wq;
     public WorkRequest wr;
     /**
-     * Creates new form CostumeOrderMngWorkAreaJPanel
      */
     public CostumeOrderMngWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
@@ -47,14 +46,27 @@ public class CostumeOrderMngWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.CostumeOrderMng = (CostumeOrderMng)organization;
         costumeEnterprise = (CostumeEnterprise)enterprise;
+        
         orderList = new ArrayList<WorkRequest>();
         wq = business.getWorkQueue();
         
         for(WorkRequest wr: wq.getWorkRequestList()){          
             if(wr.getOrderList().get(0).getEnt() == costumeEnterprise){
-                if(wr.getStatus().equals("Placed Order") || wr.getType().equals("Send_Back")){
-                    orderList.add(wr);
+                if(wr.getType() != null){
+                    if(wr.getStatus().equals("Placed Order")){
+                        orderList.add(wr);
+                    }
+                    else if(wr.getStatus().equals("Send_Back")){
+                        orderList.add(wr);
+                    }
+                    
                 }
+                else{
+                    if(wr.getStatus().equals("Placed Order")){
+                        orderList.add(wr);
+                    }
+                }
+                
             }
         }
         
@@ -93,6 +105,12 @@ public class CostumeOrderMngWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnView = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 153));
+        setForeground(new java.awt.Color(255, 102, 0));
+
+        OrderTable.setBackground(new java.awt.Color(255, 204, 153));
+        OrderTable.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        OrderTable.setForeground(new java.awt.Color(255, 102, 0));
         OrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -121,9 +139,10 @@ public class CostumeOrderMngWorkAreaJPanel extends javax.swing.JPanel {
             OrderTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("YuGothic", 1, 18)); // NOI18N
         jLabel1.setText("Order Table");
 
+        btnView.setFont(new java.awt.Font("YuGothic", 1, 14)); // NOI18N
         btnView.setText("View Details");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +177,7 @@ public class CostumeOrderMngWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
                 .addComponent(btnView)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

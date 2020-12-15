@@ -51,7 +51,6 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
         txtPrice.setText(String.valueOf(wr.getPrice()));
         
         for(Product p: orderList){
-//            System.out.print("--- "+p.getName());
             cbbProduct.addItem(p.getName());
         }
     }
@@ -61,6 +60,7 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
         
         
         for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()){
+
             if(e.getName().equals(Enterprise)){
                 if(e.getEnterpriseType().getValue().equals("Costume")){
                     CostumeEnterprise cp = (CostumeEnterprise) e;
@@ -93,7 +93,6 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtEnt = new javax.swing.JTextField();
@@ -109,13 +108,9 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
         txtReview = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
+        btnBack1 = new javax.swing.JButton();
 
-        btnBack.setText("<Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
+        setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Order Infomation");
@@ -157,14 +152,22 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack1.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(btnBack)
-                .addGap(204, 204, 204)
+                .addGap(115, 115, 115)
+                .addComponent(btnBack1)
+                .addGap(213, 213, 213)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -202,10 +205,10 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(jLabel1))
-                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(btnBack1))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,22 +242,11 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txttimeActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        userProcessContainer.remove(this);
-        Component [] componentArray = userProcessContainer.getComponents();
-        Component c = componentArray[componentArray.length-1];
-        ManageOrderJPanel mc = (ManageOrderJPanel) c;
-        mc.populateOrderTable();
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         for(Product p: orderList){
-            if(p.getName().equals(cbbProduct.getSelectedItem())){
-                Product prod = findProduct(txtEnt.getText(),p.getName());
+            if(p.getName().equals(cbbProduct.getSelectedItem().toString())){
+                Product prod = findProduct(wr.getEnterprise().getEnterpriseName(),p.getName());
                 String r = (String) cbbRate.getSelectedItem();
                 String rev = txtReview.getText();
                 prod.setRate(Integer.parseInt(r));
@@ -284,9 +276,20 @@ public class WorkRequestJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cbbProductActionPerformed
 
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        ManageOrderJPanel mc = (ManageOrderJPanel) c;
+        mc.populateOrderTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBack1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JComboBox<String> cbbProduct;
     private javax.swing.JComboBox<String> cbbRate;

@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -50,7 +51,6 @@ public class AccountJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
@@ -62,15 +62,12 @@ public class AccountJPanel extends javax.swing.JPanel {
         lblBalance = new javax.swing.JLabel();
         btnReload = new javax.swing.JButton();
         btnConfirm = new javax.swing.JButton();
+        btnBack1 = new javax.swing.JButton();
 
-        btnBack.setText("<Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
+        setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("My Account");
 
         jLabel2.setText("Name:");
@@ -90,10 +87,20 @@ public class AccountJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnConfirm.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/finish.png"))); // NOI18N
         btnConfirm.setText("Confirm");
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmActionPerformed(evt);
+            }
+        });
+
+        btnBack1.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
             }
         });
 
@@ -102,39 +109,43 @@ public class AccountJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(btnBack)
-                .addGap(190, 190, 190)
+                .addGap(391, 391, 391)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(btnReload)
                 .addGap(93, 93, 93))
             .addGroup(layout.createSequentialGroup()
-                .addGap(310, 310, 310)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(148, 148, 148)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConfirm)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtName)
-                        .addComponent(txtUserName)
-                        .addComponent(txtPassword)
-                        .addComponent(lblBalance, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(148, 148, 148)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConfirm)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtName)
+                                .addComponent(txtUserName)
+                                .addComponent(txtPassword)
+                                .addComponent(lblBalance, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(btnBack1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(jLabel1)
-                    .addComponent(btnReload))
-                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(btnReload))
+                    .addComponent(btnBack1))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,13 +157,13 @@ public class AccountJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(lblBalance))
                 .addGap(70, 70, 70)
                 .addComponent(btnConfirm)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,7 +176,49 @@ public class AccountJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnReloadActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        // TODO add your handling code here:
+        
+        
+        String name = txtName.getText();
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
+ 
+        
+        
+        String s = "^[a-zA-Z_]*$";
+        Pattern p1 = Pattern.compile(s);
+        Pattern p2 =Pattern.compile("\\d{6}"); 
+        Pattern p3 =Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[?!@#$%&*]).[A-Za-z\\d?!@#$%&*]{6,}"); 
+
+        //在这个enterprise里:all useraccount unique username 在这个enterprise里
+        for(UserAccount u: business.getUserAccountDirectory().getUserAccountList()){
+            if(userName.equals(u.getUsername())){
+                JOptionPane.showMessageDialog(null, "This username has been used","Warning", JOptionPane.WARNING_MESSAGE);
+                userName = ""; //represent the same 
+                return;
+            }
+        }
+        
+        if(p1.matcher(name).matches()){
+            JOptionPane.showMessageDialog(null, "Please input the name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(name.equals("")||userName.equals("") || password.equals("") ){ // if user don't input any of the text field
+            JOptionPane.showMessageDialog(null, "Please add a Delivery Man with all of these information.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(p1.matcher(userName).matches()){
+            JOptionPane.showMessageDialog(null, "Please input user name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if( !p3.matcher(password).matches()){
+            JOptionPane.showMessageDialog(null, "Please input password at least 6 digits and contain at least one letter, one digit and one special character ?!@#$%&*" ,"Warning", JOptionPane.WARNING_MESSAGE);
+        }else{
+            account.setName(name);
+            account.setUsername(userName);
+            account.setPassword(password);
+            lblBalance.setText(String.valueOf(account.getBalance()));
+            JOptionPane.showMessageDialog(null, "Save User Info successfully!");
+        }
+
+    }//GEN-LAST:event_btnConfirmActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
         Component [] componentArray = userProcessContainer.getComponents();
@@ -174,21 +227,11 @@ public class AccountJPanel extends javax.swing.JPanel {
         mc.populatename();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
-
-    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        // TODO add your handling code here:
-        
-        account.setName(txtName.getText());
-        account.setUsername(txtUserName.getText());
-        account.setPassword(txtPassword.getText());
-        lblBalance.setText(String.valueOf(account.getBalance()));
-        JOptionPane.showMessageDialog(null, "Save User Info successfully!");
-    }//GEN-LAST:event_btnConfirmActionPerformed
+    }//GEN-LAST:event_btnBack1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnReload;
     private javax.swing.JLabel jLabel1;

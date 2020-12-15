@@ -49,6 +49,8 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         this.business = business;      
         this.costumeEnterprise =costumeEnterprise;
         this.wr = wr;
+        deliveryCompanyList = new ArrayList<Enterprise>();
+        network = business.findNetwork(wr.getCustomer().getCity());
         pList = new ArrayList<Product>();
         
         
@@ -107,28 +109,41 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
-        btnBack.setText("<Back");
+        setBackground(new java.awt.Color(255, 204, 153));
+        setForeground(new java.awt.Color(255, 102, 0));
+
+        btnBack.setBackground(new java.awt.Color(255, 204, 153));
+        btnBack.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 102, 0));
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("YuGothic", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("Order Detail");
 
+        jLabel2.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel2.setText("Customer:");
 
         txtCustomer.setEditable(false);
 
+        jLabel3.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel3.setText("Status:");
 
         txtStatus.setEditable(false);
 
+        jLabel4.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel4.setText("Time:");
 
         txtTime.setEditable(false);
 
+        ProductTable.setBackground(new java.awt.Color(255, 204, 153));
+        ProductTable.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        ProductTable.setForeground(new java.awt.Color(255, 102, 0));
         ProductTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -151,19 +166,24 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
             ProductTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        btnConfirm.setText("Confirm");
+        btnConfirm.setBackground(new java.awt.Color(255, 204, 153));
+        btnConfirm.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        btnConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/finish.png"))); // NOI18N
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmActionPerformed(evt);
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel5.setText("Price:");
 
         txtPrice.setEditable(false);
 
+        jComboBox1.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel6.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel6.setText("Choose a delivery company:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -171,51 +191,49 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(btnBack)
-                .addGap(220, 220, 220)
+                .addGap(348, 348, 348)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(208, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(28, 28, 28)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnConfirm)))
+                .addGap(150, 150, 150))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(167, 167, 167)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCustomer)
-                            .addComponent(txtStatus)
-                            .addComponent(txtTime)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                        .addGap(249, 249, 249))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(28, 28, 28)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnConfirm)
-                                .addGap(108, 108, 108)))
-                        .addGap(150, 150, 150))))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(167, 167, 167)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCustomer)
+                    .addComponent(txtStatus)
+                    .addComponent(txtTime)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                .addGap(249, 249, 249))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(jLabel1))
+                .addComponent(jLabel1)
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,7 +245,7 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -273,12 +291,12 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         costumeEnterprise.setEnterprise_Balance(old_balance + wr.getPrice());
         
         
-        String  selected =(String)jComboBox1.getSelectedItem();
-        for(Enterprise enter:deliveryCompanyList){
-            if(enter.getName().equals(selected)){
-                wr.setDeliverman(enter.getUseraccount());
-            }
-        }
+//        String  selected =(String)jComboBox1.getSelectedItem();
+//        for(Enterprise enter:deliveryCompanyList){
+//            if(enter.getName().equals(selected)){
+//                wr.setDeliverman(enter.getUseraccount());
+//            }
+//        }
         
         wr.setStatus("Ready");
         JOptionPane.showMessageDialog(null, "Product Reset Successfully and ready for pick up by deliveryCompany!");

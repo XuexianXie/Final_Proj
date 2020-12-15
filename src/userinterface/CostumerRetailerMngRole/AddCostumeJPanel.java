@@ -10,6 +10,7 @@ import Business.Product.Product;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -49,34 +50,48 @@ public class AddCostumeJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
 
-        btnBack.setText("<Back");
+        setBackground(new java.awt.Color(255, 204, 153));
+        setForeground(new java.awt.Color(255, 102, 0));
+
+        btnBack.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("YuGothic", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("Add A New Costume");
 
+        jLabel2.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel2.setText("Costume Name:");
 
+        jLabel3.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel3.setText("Number:");
 
+        txtNum.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+
+        txtName.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
 
-        btnConfirm.setText("Confirm");
+        btnConfirm.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
+        btnConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/finish.png"))); // NOI18N
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmActionPerformed(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel4.setText("Price:");
+
+        txtPrice.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,11 +113,13 @@ public class AddCostumeJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel4))
                         .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnConfirm)
                             .addComponent(txtNum, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                             .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(txtPrice))))
-                .addContainerGap(280, Short.MAX_VALUE))
+                            .addComponent(txtPrice)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(btnConfirm)))))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,9 +140,9 @@ public class AddCostumeJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(btnConfirm)
-                .addGap(107, 107, 107))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,15 +167,40 @@ public class AddCostumeJPanel extends javax.swing.JPanel {
         String Num = txtNum.getText();
         String Price = txtPrice.getText();
         // Validate duplicate name
-        ArrayList< Product> arr = ce.getCostumeList();
-        Product a1 = new Product(); 
-        a1.setEnt(ce);
-        a1.setName(name); 
-        a1.setNumber(Integer.parseInt(Num)); 
-        a1.setPrice(Integer.parseInt(Price));
-        arr.add(a1);
-        ce.setCostumeList(arr);
-        JOptionPane.showMessageDialog(null, "New item added!");
+        
+        for(Product u:ce.getCostumeList()){
+            if(name.equals(u.getName())){
+                JOptionPane.showMessageDialog(null, "This Product name has been used","Warning", JOptionPane.WARNING_MESSAGE);
+                name = ""; //represent the same 
+                return;
+            }
+        }
+        
+        
+        String s = "^[a-zA-Z_]*$";
+        Pattern p1 = Pattern.compile(s);
+        Pattern p2 =Pattern.compile("^[0-9]*$"); 
+        if(!p2.matcher(Price).matches()){
+            JOptionPane.showMessageDialog(null, "Please input number in price.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(name.equals("") || Num.equals("") || Price.equals("")){ // if user don't input any of the text field
+            JOptionPane.showMessageDialog(null, "Please add a Delivery Man with all of these information.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(!p2.matcher(Num).matches()){
+            JOptionPane.showMessageDialog(null, "Please input number in Num.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(!p1.matcher(name).matches()){
+            JOptionPane.showMessageDialog(null, "Please input correct name.","Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            ArrayList< Product> arr = ce.getCostumeList();
+            Product a1 = new Product(); 
+            a1.setEnt(ce);
+            a1.setName(name); 
+            a1.setNumber(Integer.parseInt(Num)); 
+            a1.setPrice(Integer.parseInt(Price));
+            arr.add(a1);
+            ce.setCostumeList(arr);
+            JOptionPane.showMessageDialog(null, "New item added!");
+        }
+
     }//GEN-LAST:event_btnConfirmActionPerformed
 
 

@@ -14,6 +14,7 @@ import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.MainJFrame;
@@ -66,6 +67,8 @@ public class CustomerSignUpJPanel extends javax.swing.JPanel {
         lblCity = new javax.swing.JLabel();
         cbbCity = new javax.swing.JComboBox<>();
         btnConfirm = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Customer Sign Up");
@@ -147,22 +150,49 @@ public class CustomerSignUpJPanel extends javax.swing.JPanel {
         char[] passwordCharArray = txtPassword.getPassword();
         String password = String.valueOf(passwordCharArray);
         String city = cbbCity.getSelectedItem().toString();
-//        Customer c = business.getCustomerDirectory().createCustomer(userName);
-        Employee employee = business.getEmployeeDirectory().createEmployee(Name);
         
-        
-        for(Network n: business.getNetworkList()){
-            if(city.equals(n.toString())){
-                UserAccount ua = business.getUserAccountDirectory().createUserAccount(userName, password, employee, new CustomerRole());
-                ua.setName(Name);
-                ua.setCustomer(true);
-                ua.setCity(n.toString());
+        String s = "^[a-zA-Z_]*$";
+        Pattern p1 = Pattern.compile(s);
+        Pattern p2 =Pattern.compile("\\d{6}"); 
+        Pattern p3 =Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[?!@#$%&*]).[A-Za-z\\d?!@#$%&*]{6,}"); 
+
+        //在这个enterprise里:all useraccount unique username 在这个enterprise里
+        for(UserAccount u: business.getUserAccountDirectory().getUserAccountList()){
+            if(userName.equals(u.getUsername())){
+                JOptionPane.showMessageDialog(null, "This username has been used","Warning", JOptionPane.WARNING_MESSAGE);
+                userName = ""; //represent the same 
+                return;
             }
         }
         
+        if(p1.matcher(Name).matches()){
+            JOptionPane.showMessageDialog(null, "Please input the name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(Name.equals("")||userName.equals("") || password.equals("") ){ // if user don't input any of the text field
+            JOptionPane.showMessageDialog(null, "Please add a Delivery Man with all of these information.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if(p1.matcher(userName).matches()){
+            JOptionPane.showMessageDialog(null, "Please input user name of correct format.","Warning", JOptionPane.WARNING_MESSAGE);
+        }else if( !p3.matcher(password).matches()){
+            JOptionPane.showMessageDialog(null, "Please input password at least 6 digits and contain at least one letter, one digit and one special character ?!@#$%&*" ,"Warning", JOptionPane.WARNING_MESSAGE);
+        }else{
+            Employee employee = business.getEmployeeDirectory().createEmployee(Name);
+
+
+            for(Network n: business.getNetworkList()){
+                if(city.equals(n.toString())){
+                    UserAccount ua = business.getUserAccountDirectory().createUserAccount(userName, password, employee, new CustomerRole());
+                    ua.setName(Name);
+                    ua.setCustomer(true);
+                    ua.setCity(n.toString());
+                }
+            }
+            
+            JOptionPane.showMessageDialog(null, "Sign up successfully!");
+        }
+
         
         
-        JOptionPane.showMessageDialog(null, "Sign up successfully!");
+        
+        
     }//GEN-LAST:event_btnConfirmActionPerformed
 
 

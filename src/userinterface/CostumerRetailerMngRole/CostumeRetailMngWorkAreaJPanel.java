@@ -22,7 +22,7 @@ public class CostumeRetailMngWorkAreaJPanel extends javax.swing.JPanel {
     public JPanel userProcessContainer;
     public EcoSystem business;
     public UserAccount userAccount;
-    public CostumeSupplier CostumeSupplier;
+
     public Enterprise enterprise;
     public CostumeEnterprise ce;
     /** Creates new form AdminWorkAreaJPanel */
@@ -32,7 +32,7 @@ public class CostumeRetailMngWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business = business;
-        this.CostumeSupplier = (CostumeSupplier)organization;
+  
 //        CostumeSupplier c = new CostumeSupplier();
 //        c.setName(account.getName());
 //        c.userAccountDirectory.getUserAccountList().add(account);
@@ -58,6 +58,7 @@ public class CostumeRetailMngWorkAreaJPanel extends javax.swing.JPanel {
         manageCostumeJButton = new javax.swing.JButton();
         btnService = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N

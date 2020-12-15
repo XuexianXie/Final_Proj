@@ -22,12 +22,21 @@ public class UserAccount {
     private boolean customer = false;
     private String City;
     private int balance = 100;
+    private String enterpriseName;
 
 
     private WorkQueue workQueue;
 
     public UserAccount() {
         workQueue = new WorkQueue();
+    }
+
+    public String getEnterpriseName() {
+        return enterpriseName;
+    }
+
+    public void setEnterpriseName(String enterpriseName) {
+        this.enterpriseName = enterpriseName;
     }
 
     public int getBalance() {

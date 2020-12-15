@@ -50,7 +50,7 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
         //显示的work request
         wq = business.getWorkQueue();
         for(WorkRequest wr: wq.getWorkRequestList()){
-            if(wr.getDeliverman().equals(userAccount)){
+            if(wr.getStatus().equals("Ready")){
                 orderList.add(wr);
             }
         }
@@ -61,6 +61,25 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
             jComboBox1.addItem(d.toString());
         }
         displayTable();
+    }
+    
+    public boolean haveorder(UserAccount ua){
+        for(WorkRequest wr: business.getWorkQueue().getWorkRequestList()){
+            System.out.print("\n"+" enterprise : "+wr.getCustomer());
+            System.out.print(" enterprise : "+wr.getDeliverman());
+            System.out.print(" enterprise : "+wr.getEnterprise()+"\n");
+            if(wr.getDeliverman() != null){
+                System.out.print(" |||| : "+wr.getDeliverman());
+                System.out.print(" |||| : "+ua);
+                if(wr.getDeliverman() == ua){
+                    return true;
+                }
+            }
+            
+        }
+        
+        return false;
+        
     }
     public final void displayTable(){
         //
@@ -205,7 +224,7 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         int selectedrow = jTable1.getSelectedRow(); // get selected row number
         if(selectedrow >= 0){
-            WorkRequest a = (WorkRequest)jTable1.getValueAt(selectedrow, 1); //received 
+            WorkRequest a = orderList.get(selectedrow); //received 
             //UserAccount selectedm = new UserAccount();
             String  selected =(String)jComboBox1.getSelectedItem();
             //find the combobox selected deliver man name - user account username 比较username？
@@ -213,25 +232,37 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
             
 //seleted order has assigned delivery man
             //没有指定的话，a.getDeliverman()报错，try, catch!!
-                    if(!a.getDeliverman().getName().equals("")){
+            
+            
+                    if(a.getDeliverman() != null){
                         JOptionPane.showMessageDialog(null, "The order has assigned to another delivery man.");
                         return;
-        
                     }
  //selected deliveryman has assigned order           
             //|| a.getReceiver().equals(r)
             //find the user account of the delivery man, add work request on its work queue
+            
+
+
+            
             for(UserAccount r:Denterprise.getUserAccountDirectory().getUserAccountList()){
+                System.out.print("111111: "+ selected);
+                System.out.print("111111 "+ r.getUsername());
                 if(r.getUsername().equals(selected)){
                     //seleted useraccount(deliveryman) has no work queue, then YES!
                     //没有指定的话，r.getWorkQueue()报错，try, catch!!
-                    if(r.getWorkQueue().getWorkRequestList().isEmpty()){
-                        JOptionPane.showMessageDialog(null, " The deliveryman has assigned a order.  ");
-                        return;
-        
-                    }
+//                    if(!r.getWorkQueue().getWorkRequestList().isEmpty()){
+                    System.out.print("2222");
                     if(a.getStatus().equals("Ready")){
+                        
+                        if(haveorder(r)){
+                            
+                            JOptionPane.showMessageDialog(null, " The deliveryman has assigned a order.  ");
+                            return;
+        
+                        }
                         a.setDeliverman(r);
+                        System.out.print("deliveryman: "+r.getUsername());
                         a.setStatus("Wait");
                         JOptionPane.showMessageDialog(null, "The order is assigned to the delivery company, waiting for assignment.");
                         displayTable();

@@ -63,9 +63,12 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         //显示的work request
         wq = business.getWorkQueue();
         for(WorkRequest wr: wq.getWorkRequestList()){
-            if(wr.getDeliverman().equals(userAccount)){
-                orderList.add(wr);
+            if(wr.getDeliverman() != null){
+                if(wr.getDeliverman().equals(account)){
+                    orderList.add(wr);
+                }
             }
+            
         }
         //valueLabel.setText(userAccount.get);
         populateTable();
@@ -167,7 +170,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 finishJButtonActionPerformed(evt);
             }
         });
-        add(finishJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 180, 40));
+        add(finishJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 200, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
@@ -175,7 +178,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = workRequestJTable.getSelectedRow();
         
         if (selectedRow >= 0){
-            WorkRequest a = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+            WorkRequest a = orderList.get(selectedRow);
             if(a.getStatus().equals("Wait")){
                 //a.setEnterprise(userAccount);
                 a.setDeliverman(userAccount);
@@ -198,9 +201,11 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = workRequestJTable.getSelectedRow();
         
         if (selectedRow >= 0){
-            WorkRequest a = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+            WorkRequest a = orderList.get(selectedRow);
             if(a.getStatus().equals("Delivering")){
                 //a.setEnterprise(userAccount);
+                a.setResolveDate();
+                a.setDeliverman(null);
                 a.setStatus("Delivered");//    
                 JOptionPane.showMessageDialog(null, "The order is delivered by this delivery man.");
                  populateTable();

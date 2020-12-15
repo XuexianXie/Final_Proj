@@ -27,8 +27,11 @@ public abstract class Organization {
     
     public enum Type{
         
-        CostumeSupplier("CostumeSupplier"), CostumeOrderMng("CostumeOrderMng"),
-        Customer("Customer"),FoodSupplier("FoodSupplier"), FoodOrderMng("FoodOrderMng"),
+        CostumeSupplier("CostumeSupplier"),
+        CostumeOrderMng("CostumeOrderMng"),
+        Customer("Customer"),
+        FoodSupplier("FoodSupplier"),
+        FoodOrderMng("FoodOrderMng"),
         Delivery("Delivery"),
         Platform("Platform");
         private String value;

@@ -66,6 +66,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setForeground(new java.awt.Color(255, 102, 0));
+
+        loginJButton.setFont(new java.awt.Font("YuGothic", 1, 14)); // NOI18N
         loginJButton.setText("Login");
         loginJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,10 +77,13 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel1.setText("User Name");
 
+        jLabel2.setFont(new java.awt.Font("YuGothic", 0, 12)); // NOI18N
         jLabel2.setText("Password");
 
+        logoutJButton.setFont(new java.awt.Font("YuGothic", 1, 14)); // NOI18N
         logoutJButton.setText("Logout");
         logoutJButton.setEnabled(false);
         logoutJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +92,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btnSignUp.setFont(new java.awt.Font("YuGothic", 1, 14)); // NOI18N
         btnSignUp.setText("Sign up");
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,11 +139,12 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(loginJLabel)
                 .addGap(31, 31, 31)
                 .addComponent(btnSignUp)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
+        container.setBackground(new java.awt.Color(255, 204, 153));
         container.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(container);
 

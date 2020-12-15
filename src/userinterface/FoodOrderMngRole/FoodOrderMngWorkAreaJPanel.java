@@ -50,9 +50,21 @@ public class FoodOrderMngWorkAreaJPanel extends javax.swing.JPanel {
         
         for(WorkRequest wr: wq.getWorkRequestList()){          
             if(wr.getOrderList().get(0).getEnt() == foodEnterprise){
-                if(wr.getStatus().equals("Placed Order") || wr.getType().equals("Send_Back")){
-                    orderList.add(wr);
+                if(wr.getType() != null){
+                    if(wr.getStatus().equals("Placed Order")){
+                        orderList.add(wr);
+                    }
+                    else if(wr.getStatus().equals("Send_Back")){
+                        orderList.add(wr);
+                    }
+                    
                 }
+                else{
+                    if(wr.getStatus().equals("Placed Order")){
+                        orderList.add(wr);
+                    }
+                }
+                
             }
         }
         
@@ -89,6 +101,8 @@ public class FoodOrderMngWorkAreaJPanel extends javax.swing.JPanel {
         btnView = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         OrderTable = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Food Order Table");

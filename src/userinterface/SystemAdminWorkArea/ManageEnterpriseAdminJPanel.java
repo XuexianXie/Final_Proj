@@ -430,15 +430,23 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
             if(enterprise.getEnterpriseType().equals(DeliveryCompany)){
                 UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new DeliveryManagerRole());
+                account.setName(name);
+                enterprise.setUseraccount(account);
             }
             if(enterprise.getEnterpriseType().equals(Platform)){
                 UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new PlatformManagerRole());
+                account.setName(name);
+                enterprise.setUseraccount(account);
             }
             if(enterprise.getEnterpriseType().equals(Food)){
                 UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new FoodRetailerMngRole());
+                account.setName(name);
+                enterprise.setUseraccount(account);
             }
             if(enterprise.getEnterpriseType().equals(Costume)){
                 UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new CostumeRetailerMngRole());
+                account.setName(name);
+                enterprise.setUseraccount(account);
             }
             
             

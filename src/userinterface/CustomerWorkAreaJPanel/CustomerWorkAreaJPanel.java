@@ -62,6 +62,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 204, 153));
+
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Customer Work Area");
 

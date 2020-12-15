@@ -55,7 +55,6 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
                       <Component id="savebtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
@@ -147,7 +146,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Yu Gothic UI" size="18" style="1"/>
+          <Font name="YuGothic" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Create Customer Manager"/>
       </Properties>

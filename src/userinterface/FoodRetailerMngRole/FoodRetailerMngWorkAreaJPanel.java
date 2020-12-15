@@ -57,6 +57,9 @@ public class FoodRetailerMngWorkAreaJPanel extends javax.swing.JPanel {
         manageFoodJButton = new javax.swing.JButton();
         btnService = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 153));
+        setForeground(new java.awt.Color(255, 102, 0));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Food Retailer Manage");
 

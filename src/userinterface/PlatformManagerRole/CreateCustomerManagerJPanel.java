@@ -77,7 +77,7 @@ public class CreateCustomerManagerJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel2.setText("Name:");
 
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("YuGothic", 1, 18)); // NOI18N
         jLabel3.setText("Create Customer Manager");
 
         savebtn.setBackground(new java.awt.Color(255, 153, 51));
@@ -131,7 +131,6 @@ public class CreateCustomerManagerJPanel extends javax.swing.JPanel {
                                     .addGap(70, 70, 70)
                                     .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
                         .addComponent(savebtn)
                         .addGap(90, 90, 90)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

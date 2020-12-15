@@ -48,6 +48,10 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
         userTextField.setText(a.getUsername());
         passTextField.setText(a.getPassword());
         nameTextField.setText(a.getName());
+        userTextField.setEditable(false);
+        passTextField.setEditable(false);
+        nameTextField.setEditable(false);
+
         savebtn.setEnabled(false);
         updatebtn.setEnabled(true); 
         
@@ -93,7 +97,6 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
 
         userTextField.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         userTextField.setToolTipText("unqiue numeric string ");
-        userTextField.setEnabled(false);
 
         savebtn.setBackground(new java.awt.Color(255, 204, 153));
         savebtn.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
@@ -115,14 +118,12 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
 
         passTextField.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         passTextField.setToolTipText("unqiue numeric string ");
-        passTextField.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel3.setText("Password:");
 
         nameTextField.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         nameTextField.setToolTipText("unqiue numeric string ");
-        nameTextField.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel4.setText("Name:");
@@ -255,9 +256,9 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_savebtnActionPerformed
 
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
-        userTextField.setEnabled(true);
-        passTextField.setEnabled(true);
-        nameTextField.setEnabled(true);
+        userTextField.setEditable(true);
+        passTextField.setEditable(true);
+        nameTextField.setEditable(true);
         savebtn.setEnabled(true);
         updatebtn.setEnabled(false);
         
