@@ -5,9 +5,9 @@
  */
 package Business.Enterprise;
 
-import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
 
 /**
  *
@@ -17,19 +17,14 @@ public abstract class Enterprise extends Organization{
     
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
-    
-    //private CustomerDirectory customerDirectory;
-    
-
+    public UserAccount useraccount;
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
     
     public enum EnterpriseType{
-        //Hospital("Hospital");
-        FoodRetailer("FoodRetailer"),
+        Costume("Costume"),Food("Food"),
         DeliveryCompany("DeliveryCompany"),
-        CostumeRetailer("CostumeRetailer"),
         Platform("Platform");
         
         private String value;
@@ -42,8 +37,16 @@ public abstract class Enterprise extends Organization{
         }
         @Override
         public String toString(){
-        return value;
+            return value;
+        }
     }
+    
+    public UserAccount getUseraccount() {
+        return useraccount;
+    }
+
+    public void setUseraccount(UserAccount useraccount) {
+        this.useraccount = useraccount;
     }
 
     public EnterpriseType getEnterpriseType() {
@@ -58,5 +61,6 @@ public abstract class Enterprise extends Organization{
         super(name);
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
+        useraccount = new UserAccount();
     }
 }

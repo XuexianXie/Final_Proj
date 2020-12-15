@@ -5,7 +5,10 @@
  */
 package Business.Network;
 
+import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Product.Product;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,9 +17,11 @@ import Business.Enterprise.EnterpriseDirectory;
 public class Network {
     private String name;
     private EnterpriseDirectory enterpriseDirectory;
+    private ArrayList<Product> productDirectory;
     
     public Network(){
         enterpriseDirectory=new EnterpriseDirectory();
+        productDirectory = new ArrayList<Product>();
     }
     public String getName() {
         return name;
@@ -28,6 +33,21 @@ public class Network {
 
     public EnterpriseDirectory getEnterpriseDirectory() {
         return enterpriseDirectory;
+    }
+    
+    public ArrayList<Product> getProductDirectory(){
+        return productDirectory;
+    }
+    
+    
+    
+    public Enterprise findEnterprise(String n){
+        for(Enterprise e: enterpriseDirectory.getEnterpriseList()){
+            if(e.toString().equals(n)){
+                return e;
+            }
+        }
+        return null;
     }
     
     @Override

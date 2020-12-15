@@ -13,6 +13,7 @@ import Business.Organization.DeliveryOrganization;
 import Business.Organization.Organization;
 
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.WorkQueue;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
@@ -34,42 +35,57 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     
     private Enterprise Denterprise;
+    private EcoSystem business;
+    private ArrayList<WorkRequest> orderList;
+    public WorkQueue wq;
     
     
-    public assignDeliverJPanel(JPanel userProcessContainer, Enterprise Denterprise,UserAccount userAccount) {
+    public assignDeliverJPanel(JPanel userProcessContainer, Enterprise Denterprise,UserAccount userAccount,EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.Denterprise = Denterprise;
-        
+        this.business = business;
         this.userAccount = userAccount;
+        orderList = new ArrayList<WorkRequest>();
+        //显示的work request
+        wq = business.getWorkQueue();
+        for(WorkRequest wr: wq.getWorkRequestList()){
+            if(wr.getDeliverman().equals(userAccount)){
+                orderList.add(wr);
+            }
+        }
         
-        displayTable();
         DeliveryCompanyEnterprise de = (DeliveryCompanyEnterprise)Denterprise;
         jComboBox1.removeAllItems();
         for (DeliveryMan d : de.getDeliveryManDirectory().getdList()) {
             jComboBox1.addItem(d.toString());
         }
+        displayTable();
     }
     public final void displayTable(){
         //
-        ArrayList<WorkRequest> pd = new ArrayList();
+        //ArrayList<WorkRequest> pd = new ArrayList();
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
+        
+        /*
         for(WorkRequest a : userAccount.getWorkQueue().getWorkRequestList()){
-            if(a.getStatus().equals("processed") || a.getStatus().equals("received"))
+            if(a.getStatus().equals("Ready") || a.getStatus().equals("Delivering"))
                 pd.add(a);
             
-        }
-        for(WorkRequest a :pd){
-            Object row[] = new Object[4];
-            //row[0] = vs.getDate();
-            row[0] = a.getSender(); 
-            //Because we need a object element in row to achieve "delete" operation later.
-            row[1] = a;
-            row[2] = a.getStatus();
+        }*/
+        //另一种方法
+        
+        for(WorkRequest a :orderList){
+            Object row[] = new Object[5];
+            
+            row[0] = a.getCustomer(); 
+            row[1] = a.getEnterprise();  
+            row[2] = a.getDeliverman();
+            row[3] = a.getStatus();
             //?request time 无
             SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-            row[3] = df.format(a.getRequestDate());
+            row[4] = df.format(a.getRequestDate());
             
             dtm.addRow(row);
         }
@@ -92,16 +108,19 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 204, 153));
+
+        jTable1.setFont(new java.awt.Font("Yu Gothic", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Sender", "Message", "Status", "Request Time"
+                "Sender", "Receiver", "Deliver Man", "Status", "Request Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -110,7 +129,7 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 0));
         jLabel1.setText("Orders Assignment");
 
@@ -123,81 +142,103 @@ public class assignDeliverJPanel extends javax.swing.JPanel {
         });
 
         backbtn.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        backbtn.setText("Back");
+        backbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
         backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtnActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel2.setText("Choose a delivery man");
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/kuaidi.png"))); // NOI18N
+        jLabel2.setToolTipText("Choose a delivery man");
 
-        jComboBox1.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(176, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAssign)))
-                        .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(backbtn)
-                        .addGap(142, 142, 142)
-                        .addComponent(jLabel1)
-                        .addGap(263, 263, 263))))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel2))
+                    .addComponent(btnAssign))
+                .addGap(129, 129, 129))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel1)
+                .addGap(7, 7, 7)
+                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnAssign))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(backbtn)))
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssign)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         int selectedrow = jTable1.getSelectedRow(); // get selected row number
         if(selectedrow >= 0){
-            WorkRequest a = (WorkRequest)jTable1.getValueAt(selectedrow, 1);
-            String selected =(String) jComboBox1.getSelectedItem();
-            //find the combobox selected deliver man name - user account username
-            if(a.getStatus().equals("received")){
-                JOptionPane.showMessageDialog(null, "The order has assigned to another delivery man.");
+            WorkRequest a = (WorkRequest)jTable1.getValueAt(selectedrow, 1); //received 
+            //UserAccount selectedm = new UserAccount();
+            String  selected =(String)jComboBox1.getSelectedItem();
+            //find the combobox selected deliver man name - user account username 比较username？
+            
+            
+//seleted order has assigned delivery man
+            //没有指定的话，a.getDeliverman()报错，try, catch!!
+                    if(!a.getDeliverman().getName().equals("")){
+                        JOptionPane.showMessageDialog(null, "The order has assigned to another delivery man.");
+                        return;
         
-            }
+                    }
+ //selected deliveryman has assigned order           
             //|| a.getReceiver().equals(r)
             //find the user account of the delivery man, add work request on its work queue
             for(UserAccount r:Denterprise.getUserAccountDirectory().getUserAccountList()){
                 if(r.getUsername().equals(selected)){
-                    r.getWorkQueue().addWorkRequest(a);
-                    a.setReceiver(r);
-                    a.setStatus("received");
-                    JOptionPane.showMessageDialog(null, "The order is assigned to the delivery man.");
-                    displayTable();
+                    //seleted useraccount(deliveryman) has no work queue, then YES!
+                    //没有指定的话，r.getWorkQueue()报错，try, catch!!
+                    if(r.getWorkQueue().getWorkRequestList().isEmpty()){
+                        JOptionPane.showMessageDialog(null, " The deliveryman has assigned a order.  ");
+                        return;
+        
+                    }
+                    if(a.getStatus().equals("Ready")){
+                        a.setDeliverman(r);
+                        a.setStatus("Wait");
+                        JOptionPane.showMessageDialog(null, "The order is assigned to the delivery company, waiting for assignment.");
+                        displayTable();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "The previous process must be completed first");
+                    }
+                   
                 }
             }
             

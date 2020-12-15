@@ -32,16 +32,18 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     //private Organization organization;
     private DeliveryManDirectory custD;
+    private EcoSystem business;
     //private DeliveryCompanyEnterprise Denterprise;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public DeliveryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise ) {
+    public DeliveryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise ,EcoSystem business) {
         initComponents();
         this.enterprise = enterprise;
         this.userProcessContainer = userProcessContainer;
         this.user = account;
+        this.business = business;
         //this.organization =  organization;
         //Denterprise =(DeliveryCompanyEnterprise)enterprise;
      
@@ -64,35 +66,43 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
         manageDeliverymanJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 204, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        assignDeliverymanJButton.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         assignDeliverymanJButton.setText("Assignment of delivery man");
         assignDeliverymanJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignDeliverymanJButtonActionPerformed(evt);
             }
         });
-        add(assignDeliverymanJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 200, -1));
+        add(assignDeliverymanJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 240, -1));
 
+        manageDeliverymanJButton.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         manageDeliverymanJButton.setText("Manage delivery man");
         manageDeliverymanJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageDeliverymanJButtonActionPerformed(evt);
             }
         });
-        add(manageDeliverymanJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+        add(manageDeliverymanJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 210, -1));
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         enterpriseLabel.setText("Delivery Company:");
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 200, 30));
 
+        valueLabel.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 130, -1));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 130, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/37d5237749e5b8cc66dc0aa4f329206.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 430, 310));
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignDeliverymanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDeliverymanJButtonActionPerformed
-        assignDeliverJPanel p  = new assignDeliverJPanel(userProcessContainer,enterprise,user); //user: manager
+        assignDeliverJPanel p  = new assignDeliverJPanel(userProcessContainer,enterprise,user,business); //user: manager
         userProcessContainer.add("ADJPanel",p);
         CardLayout layout =  (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -109,6 +119,7 @@ public class DeliveryManagerWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignDeliverymanJButton;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageDeliverymanJButton;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables

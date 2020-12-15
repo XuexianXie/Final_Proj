@@ -5,8 +5,6 @@
  */
 package Business.Enterprise;
 
-import Business.CustomerManager.CustomerManagerDirectory;
-import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Organization.OrganizationDirectory;
 import java.util.ArrayList;
 
@@ -21,6 +19,8 @@ public class EnterpriseDirectory {
     public ArrayList<Enterprise> getEnterpriseList() {
         return enterpriseList;
     }
+    
+    
 
     public void setEnterpriseList(ArrayList<Enterprise> enterpriseList) {
         this.enterpriseList = enterpriseList;
@@ -33,19 +33,22 @@ public class EnterpriseDirectory {
     //Create enterprise
     public Enterprise createAndAddEnterprise(String name,Enterprise.EnterpriseType type){
         Enterprise enterprise=null;
-        
-        if(type==Enterprise.EnterpriseType.DeliveryCompany){
-            enterprise=new DeliveryCompanyEnterprise(name,new DeliveryManDirectory());
+        if(type==Enterprise.EnterpriseType.Costume){
+            enterprise=new CostumeEnterprise(name);
             enterpriseList.add(enterprise);
         }
-        if(type==Enterprise.EnterpriseType.Platform){
-            enterprise=new PlatformEnterprise(name,new CustomerManagerDirectory());
+        else if(type==Enterprise.EnterpriseType.Food){
+            enterprise=new FoodEnterprise(name);
             enterpriseList.add(enterprise);
         }
-        
+        else if(type==Enterprise.EnterpriseType.Platform){
+            enterprise=new PlatformEnterprise(name);
+            enterpriseList.add(enterprise);
+        }
+        else if(type==Enterprise.EnterpriseType.DeliveryCompany){
+            enterprise=new DeliveryCompanyEnterprise(name);
+            enterpriseList.add(enterprise);
+        }
         return enterprise;
-    }
-    public void deleteEnterprise(Enterprise c){
-         enterpriseList.remove(c);
     }
 }

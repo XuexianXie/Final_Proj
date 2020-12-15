@@ -4,6 +4,7 @@
  */
 package Business.Organization;
 
+import Business.Customer.CustomerDirectory;
 import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
@@ -19,17 +20,17 @@ public abstract class Organization {
     private String name;
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDirectory;
-    private UserAccountDirectory userAccountDirectory;
+    public UserAccountDirectory userAccountDirectory;
     private int organizationID;
     private static int counter=0;
+    private CustomerDirectory customerDirectory;
     
     public enum Type{
-        FoodOrder("FoodOrder"),
+        
+        CostumeSupplier("CostumeSupplier"), CostumeOrderMng("CostumeOrderMng"),
+        Customer("Customer"),FoodSupplier("FoodSupplier"), FoodOrderMng("FoodOrderMng"),
         Delivery("Delivery"),
-        CostumeOrder("CostumeOrder"),
         Platform("Platform");
-        
-        
         private String value;
         private Type(String value) {
             this.value = value;
@@ -44,8 +45,10 @@ public abstract class Organization {
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
+        customerDirectory = new CustomerDirectory();
         organizationID = counter;
-        ++counter;
+        System.out.print(organizationID);
+        counter++;
     }
 
     public abstract ArrayList<Role> getSupportedRole();
@@ -61,6 +64,12 @@ public abstract class Organization {
     public EmployeeDirectory getEmployeeDirectory() {
         return employeeDirectory;
     }
+    
+    public CustomerDirectory getCustomerDirectory() {
+        return customerDirectory;
+    }
+    
+    
     
     public String getName() {
         return name;

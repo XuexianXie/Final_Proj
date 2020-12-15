@@ -9,10 +9,13 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Role.CustomerRole;
+import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.CustomerWorkAreaJPanel.CustomerSignUpJPanel;
 
 /**
  *
@@ -32,6 +35,14 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1680, 1050);
     }
 
+    
+    public void retrieveUserLogin(){
+        logoutJButton.setEnabled(false);
+        userNameJTextField.setEnabled(false);
+        passwordField.setEnabled(false);
+        loginJButton.setEnabled(false);
+        btnSignUp.setEnabled(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +61,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         loginJLabel = new javax.swing.JLabel();
         logoutJButton = new javax.swing.JButton();
+        btnSignUp = new javax.swing.JButton();
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +85,13 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btnSignUp.setText("Sign up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignUpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,7 +108,8 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(logoutJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                             .addGap(26, 26, 26)
                             .addComponent(loginJLabel)))
-                    .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignUp))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,7 +129,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(logoutJButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginJLabel)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnSignUp)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -131,10 +153,15 @@ public class MainJFrame extends javax.swing.JFrame {
         
         //Step1: Check in the system admin user account directory if you have the user
         UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+        for(UserAccount u: system.getUserAccountDirectory().getUserAccountList()){
+            System.out.print(u);
+        }
         
         Enterprise inEnterprise=null;
         Organization inOrganization=null;
+
         
+        // useraccount validation
         if(userAccount==null){
             //Step 2: Go inside each network and check each enterprise
             for(Network network:system.getNetworkList()){
@@ -167,17 +194,33 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }
         
+        
+        
         if(userAccount==null){
+            
             JOptionPane.showMessageDialog(null, "Invalid credentials");
             return;
         }
         else{
             CardLayout layout=(CardLayout)container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            
+            if(userAccount.getCustomer() == true){
+                System.out.print("Customer");
+                container.add("workArea",userAccount.getRole().createCustomerWorkArea(container, userAccount, system));
+            }
+            else{
+                System.out.print("Other");
+//            System.out.print("Enterprise: "+userAccount.getRole());
+//            System.out.print("Organization: "+inOrganization);
+                container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            
+            }
             layout.next(container);
+
         }
         
         loginJButton.setEnabled(false);
+        btnSignUp.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
@@ -188,7 +231,7 @@ public class MainJFrame extends javax.swing.JFrame {
         userNameJTextField.setEnabled(true);
         passwordField.setEnabled(true);
         loginJButton.setEnabled(true);
-
+        btnSignUp.setEnabled(true);
         userNameJTextField.setText("");
         passwordField.setText("");
 
@@ -199,6 +242,20 @@ public class MainJFrame extends javax.swing.JFrame {
         crdLyt.next(container);
         dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_logoutJButtonActionPerformed
+
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+        // TODO add your handling code here:
+//        logoutJButton.setEnabled(false);
+//        userNameJTextField.setEnabled(false);
+//        passwordField.setEnabled(false);
+//        loginJButton.setEnabled(false);
+//        btnSignUp.setEnabled(false);
+        CustomerSignUpJPanel customerSignUpJPanel = new CustomerSignUpJPanel(container, system);
+        container.add("customerSignUpJPanel", customerSignUpJPanel);
+        System.out.print(container.getComponents());
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }//GEN-LAST:event_btnSignUpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,6 +292,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSignUp;
     private javax.swing.JPanel container;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

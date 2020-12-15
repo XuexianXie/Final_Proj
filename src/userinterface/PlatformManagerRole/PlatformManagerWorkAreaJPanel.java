@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.CustomerMngRole.ManageCustomerRequestJPanel;
 
 /**
  *
@@ -37,16 +38,18 @@ public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     //private Organization organization;
     private CustomerManagerDirectory custD;
+    private EcoSystem business;
     //private PlatformEnterprise Denterprise;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public PlatformManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise ) {
+    public PlatformManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.enterprise = enterprise;
         this.userProcessContainer = userProcessContainer;
         this.user = account;
+        this.business = business;
         //this.organization =  organization;
         //Denterprise = (PlatformEnterprise)enterprise;
         //for(Employee e: enterprise.getEmployeeDirectory().getEmployeeList() ){
@@ -70,18 +73,21 @@ public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
         manageDeliverymanJButton = new javax.swing.JButton();
+        btnManageCustomerRequst = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 204, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        enterpriseLabel.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         enterpriseLabel.setText("Platform:");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 200, 30));
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 90, 30));
 
-        valueLabel.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        valueLabel.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 210, -1));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 210, -1));
 
-        manageDeliverymanJButton.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        manageDeliverymanJButton.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         manageDeliverymanJButton.setText("Customer Service");
         manageDeliverymanJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,18 +95,39 @@ public class PlatformManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(manageDeliverymanJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+
+        btnManageCustomerRequst.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        btnManageCustomerRequst.setText("Enterprise Evaluation");
+        btnManageCustomerRequst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageCustomerRequstActionPerformed(evt);
+            }
+        });
+        add(btnManageCustomerRequst, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 210, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/platform.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 100));
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageDeliverymanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageDeliverymanJButtonActionPerformed
         //system.getWorkQueue()
-        CustomerServiceJPanel p  = new CustomerServiceJPanel(userProcessContainer,enterprise);
+        CustomerServiceJPanel p  = new CustomerServiceJPanel(userProcessContainer,enterprise, business);
         userProcessContainer.add("CSJPanel",p);
         CardLayout layout =  (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageDeliverymanJButtonActionPerformed
 
+    private void btnManageCustomerRequstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomerRequstActionPerformed
+        ManageEnterpriseJPanel manageCustomerRequestJPanel=new ManageEnterpriseJPanel(userProcessContainer, enterprise, business);
+        userProcessContainer.add("mManageEnterpriseJPanelJPanel",manageCustomerRequestJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageCustomerRequstActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageCustomerRequst;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageDeliverymanJButton;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables

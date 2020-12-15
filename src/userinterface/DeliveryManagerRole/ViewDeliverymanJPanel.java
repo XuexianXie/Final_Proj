@@ -74,21 +74,24 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
         passTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 204, 153));
+
         backbtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        backbtn.setText("Back");
+        backbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
         backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtnActionPerformed(evt);
             }
         });
 
-        Header.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        Header.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         Header.setForeground(new java.awt.Color(255, 102, 0));
         Header.setText("View A Delivery Man");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         jLabel2.setText("Username:");
 
+        userTextField.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         userTextField.setToolTipText("unqiue numeric string ");
         userTextField.setEnabled(false);
 
@@ -108,12 +111,14 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
             }
         });
 
+        nameTextField.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         nameTextField.setToolTipText("unqiue numeric string ");
         nameTextField.setEnabled(false);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         jLabel3.setText("Name:");
 
+        telTextField.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         telTextField.setToolTipText("unqiue numeric string ");
         telTextField.setEnabled(false);
         telTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -122,9 +127,10 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         jLabel4.setText("Tel:");
 
+        passTextField.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         passTextField.setToolTipText("unqiue numeric string ");
         passTextField.setEnabled(false);
         passTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +139,7 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
         jLabel5.setText("Password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -142,9 +148,6 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(backbtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(354, 354, 354)
                         .addComponent(Header))
@@ -172,8 +175,11 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
                                 .addGap(77, 77, 77)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(telTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(340, Short.MAX_VALUE))
+                                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,8 +187,8 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
                 .addGap(47, 47, 47)
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(backbtn)
-                .addGap(34, 34, 34)
+                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,7 +208,7 @@ public class ViewDeliverymanJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(savebtn)
                     .addComponent(updatebtn))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

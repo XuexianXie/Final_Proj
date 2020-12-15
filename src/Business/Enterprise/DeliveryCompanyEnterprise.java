@@ -21,6 +21,11 @@ public class DeliveryCompanyEnterprise extends Enterprise {
         this.deliveryManDirectory = deliveryManDirectory;
     }
 
+    DeliveryCompanyEnterprise(String name) {
+        super(name,EnterpriseType.DeliveryCompany);
+        this.deliveryManDirectory = new DeliveryManDirectory();
+    }
+
     public DeliveryManDirectory getDeliveryManDirectory() {
         return deliveryManDirectory;
     }

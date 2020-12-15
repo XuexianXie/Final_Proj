@@ -15,16 +15,52 @@ import Business.WorkQueue.WorkQueue;
 public class UserAccount {
     
     private String username;
+    private String name;
     private String password;
     private Employee employee;
     private Role role;
+    private boolean customer = false;
+    private String City;
+    private int balance = 100;
+
+
     private WorkQueue workQueue;
 
     public UserAccount() {
         workQueue = new WorkQueue();
     }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
     
+    public void addBalance(int balance){
+        this.balance+=balance;
+    }
     
+    public void minusBalance(int balance)
+    {
+        this.balance-=balance;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String City) {
+        this.City = City;
+    }
     
     public String getUsername() {
         return username;
@@ -60,6 +96,14 @@ public class UserAccount {
 
     public WorkQueue getWorkQueue() {
         return workQueue;
+    }
+    
+    public boolean getCustomer(){
+        return customer;
+    }
+    
+    public void setCustomer(boolean b){
+        this.customer = b;
     }
 
     

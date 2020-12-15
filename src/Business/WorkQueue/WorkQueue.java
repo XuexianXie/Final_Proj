@@ -4,7 +4,6 @@
  */
 package Business.WorkQueue;
 
-import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -19,18 +18,16 @@ public class WorkQueue {
         workRequestList = new ArrayList();
     }
 
+    public void add(WorkRequest e){
+        workRequestList.add(e);
+    }
+    
+    public void delete(WorkRequest e){
+        workRequestList.remove(e);
+    }
+    
+
     public ArrayList<WorkRequest> getWorkRequestList() {
         return workRequestList;
-    }
-    
-    public WorkRequest createWorkRequest(String message,UserAccount sender,UserAccount receiver, String status){
-        WorkRequest w = new WorkRequest(message, sender, receiver, status);
-        workRequestList.add(w);
-        return w;
-    }
-    
-    public WorkRequest addWorkRequest(WorkRequest w){
-        workRequestList.add(w);
-        return w;
     }
 }

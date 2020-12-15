@@ -14,15 +14,20 @@ import java.util.ArrayList;
  * @author MyPC1
  */
 public class PlatformEnterprise extends Enterprise {
-    private CustomerManagerDirectory deliveryManDirectory;
+    private CustomerManagerDirectory CusManDirectory;
     
-    public PlatformEnterprise(String name,CustomerManagerDirectory deliveryManDirectory){
+    public PlatformEnterprise(String name,CustomerManagerDirectory CusManDirectory){
         super(name,EnterpriseType.Platform);
-        this.deliveryManDirectory = deliveryManDirectory;
+        this.CusManDirectory = CusManDirectory;
+    }
+
+    public PlatformEnterprise(String name) {
+        super(name,EnterpriseType.Platform);
+        this.CusManDirectory = new CustomerManagerDirectory();
     }
 
     public CustomerManagerDirectory getCustomerManagerDirectory() {
-        return deliveryManDirectory;
+        return CusManDirectory;
     }
     
     @Override

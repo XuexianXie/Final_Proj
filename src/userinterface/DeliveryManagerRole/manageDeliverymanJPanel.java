@@ -47,7 +47,10 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         Denterprise = (DeliveryCompanyEnterprise)enterprise;
         custD = Denterprise.getDeliveryManDirectory();
-        populateTable();
+        if(!custD.getdList().isEmpty()){
+            populateTable();
+        }
+        
     }
     
     public final void populateTable(){
@@ -83,6 +86,9 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         viewBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 204, 153));
+
+        jTable1.setFont(new java.awt.Font("Yu Gothic", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -112,14 +118,14 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         }
 
         deleteBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        deleteBtn.setText("Delete ");
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/delete.png"))); // NOI18N
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
             }
         });
 
-        createCbtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        createCbtn.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         createCbtn.setText("Create Delivery Man");
         createCbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,18 +134,18 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         });
 
         backbtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        backbtn.setText("Back");
+        backbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
         backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtnActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel1.setText("Organization: Deliveryman Management");
+        jLabel1.setText("Deliveryman Management");
 
-        viewBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        viewBtn.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         viewBtn.setText("View Details");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,35 +161,35 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
+                .addGap(111, 111, 111)
+                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(createCbtn, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(viewBtn)
-                                        .addGap(54, 54, 54)
-                                        .addComponent(deleteBtn)))
-                                .addGap(215, 215, 215)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(createCbtn, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jLabel1)))
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(viewBtn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(215, 215, 215)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(186, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backbtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -192,12 +198,12 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
                         .addGap(80, 80, 80)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewBtn)
-                    .addComponent(deleteBtn))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewBtn))
                 .addGap(30, 30, 30)
                 .addComponent(createCbtn)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -210,8 +216,8 @@ public class manageDeliverymanJPanel extends javax.swing.JPanel {
             //return int value
             if (dialogResult == JOptionPane.YES_OPTION){
                 enterprise.getEmployeeDirectory().deleteEmployee(a);
-                enterprise.getUserAccountDirectory().removeUserAccount(a.getUsername());
-                
+//                enterprise.getUserAccountDirectory().removeUserAccount(a.getUsername());
+                enterprise.getUserAccountDirectory().getUserAccountList().remove(a);
                 custD.deleteDeliveryMan(a);
                 JOptionPane.showMessageDialog(null,"This DeliveryMan has been deleted.");
                 populateTable();

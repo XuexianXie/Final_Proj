@@ -74,24 +74,28 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
         nameTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 204, 153));
+
         backbtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        backbtn.setText("Back");
+        backbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
         backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtnActionPerformed(evt);
             }
         });
 
-        Header.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        Header.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         Header.setForeground(new java.awt.Color(255, 102, 0));
         Header.setText("View A Customer Manager");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel2.setText("Username:");
 
+        userTextField.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         userTextField.setToolTipText("unqiue numeric string ");
         userTextField.setEnabled(false);
 
+        savebtn.setBackground(new java.awt.Color(255, 204, 153));
         savebtn.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         savebtn.setText("Save");
         savebtn.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +104,7 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
             }
         });
 
+        updatebtn.setBackground(new java.awt.Color(255, 204, 153));
         updatebtn.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         updatebtn.setText("Update");
         updatebtn.addActionListener(new java.awt.event.ActionListener() {
@@ -108,16 +113,18 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
             }
         });
 
+        passTextField.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         passTextField.setToolTipText("unqiue numeric string ");
         passTextField.setEnabled(false);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel3.setText("Password:");
 
+        nameTextField.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         nameTextField.setToolTipText("unqiue numeric string ");
         nameTextField.setEnabled(false);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel4.setText("Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -125,42 +132,42 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(29, 29, 29)
-                            .addComponent(savebtn)
-                            .addGap(45, 45, 45)
-                            .addComponent(updatebtn))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(53, 53, 53)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(passTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(77, 77, 77)
-                            .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(62, 62, 62)
-                            .addComponent(backbtn))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(savebtn)
+                                .addGap(45, 45, 45)
+                                .addComponent(updatebtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(53, 53, 53)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(passTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(77, 77, 77)
+                                .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(321, 321, 321)
-                            .addComponent(Header))))
-                .addContainerGap(342, Short.MAX_VALUE))
+                            .addComponent(Header)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(backbtn)
-                .addGap(28, 28, 28)
+                .addGap(4, 4, 4)
+                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,7 +183,7 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(savebtn)
                     .addComponent(updatebtn))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,6 +243,9 @@ public class ViewCustomerManagerJPanel extends javax.swing.JPanel {
             a.setUsername(user);
             enterprise.getEmployeeDirectory().updateEmployee(a, name);
             enterprise.getUserAccountDirectory().updateUserAccount(user,pass);
+            userTextField.setEditable(false);
+            passTextField.setEditable(false);
+            nameTextField.setEditable(false);
             savebtn.setEnabled(false);
             updatebtn.setEnabled(true);
             JOptionPane.showMessageDialog(null, "The customer manager information updated successfully!");      

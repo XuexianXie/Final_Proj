@@ -4,7 +4,10 @@
  */
 package Business.WorkQueue;
 
+import Business.Enterprise.Enterprise;
+import Business.Product.Product;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,46 +16,86 @@ import java.util.Date;
  */
 public class WorkRequest {
 
-    private String message;
-    private UserAccount sender;
-    private UserAccount receiver;
+    private ArrayList<Product> orderList;
+    private UserAccount customer;
+    private UserAccount Enterprise;
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    private int Price;
+    private boolean cus2ent = true;
+    private UserAccount deliverman;
+    private String type;
+    private String reason;
     
-    public WorkRequest(String message,UserAccount sender,UserAccount receiver, String status){
+    public WorkRequest(){
         requestDate = new Date();
-        
-        this.message = message;
-        this.sender = sender;
-        this.receiver = receiver;
-        this.status = status;
-        //this.comments = "";
-        this.resolveDate=null;
     }
 
-    public String getMessage() {
-        return message;
+    public String getReason() {
+        return reason;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
-    public UserAccount getSender() {
-        return sender;
+    
+    public String getType() {
+        return type;
     }
 
-    public void setSender(UserAccount sender) {
-        this.sender = sender;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public UserAccount getReceiver() {
-        return receiver;
+    public UserAccount getDeliverman() {
+        return deliverman;
     }
 
-    public void setReceiver(UserAccount receiver) {
-        this.receiver = receiver;
+    public void setDeliverman(UserAccount deliverman) {
+        this.deliverman = deliverman;
+    }
+
+    
+    public boolean isCus2ent() {
+        return cus2ent;
+    }
+
+    public void setCus2ent(boolean cus2ent) {
+        this.cus2ent = cus2ent;
+    }
+
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int Price) {
+        this.Price = Price;
+    }
+
+    public ArrayList<Product> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(ArrayList<Product> orderList) {
+        this.orderList = orderList;
+    }
+
+    public UserAccount getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(UserAccount customer) {
+        this.customer = customer;
+    }
+    
+    public UserAccount getEnterprise() {
+        return Enterprise;
+    }
+
+    public void setEnterprise(UserAccount Enterprise) {
+        this.Enterprise = Enterprise;
     }
 
     public String getStatus() {
@@ -78,4 +121,5 @@ public class WorkRequest {
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
+    
 }

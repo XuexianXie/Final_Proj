@@ -8,22 +8,28 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.awt.Component;
 import javax.swing.JPanel;
+import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 
 /**
  *
  * @author raunak
  */
 public abstract class Role {
+
     
     public enum RoleType{
-        DeliveryManager("DeliveryManager"),
-        PlatformManager("PlatformManager"),
-        DeliveryMan("DeliveryMan"),
-        CustomerManager("CustomerManager");
-        //SystemAdmi;
         
-        
+        CostumeRetaierMngRole("CostumeRetaierMngRole"),
+        CostumeOrderMngRole("CostumeOrderMngRole"),
+        CustomerRole("CustomerRole"),
+        FoodRetailerMngRole("FoodRetailerMngRole"),
+        FoodOrderMngRole("FoodOrderMngRole"),
+        DeliveryManagerRole("DeliveryManagerRole"),
+        DeliveryManRole("DeliveryManRole"),
+        PlatformManagerRole("PlatformManagerRole"),
+        CustomerManagerRole("CustomerManagerRole");
         private String value;
         private RoleType(String value){
             this.value = value;
@@ -43,6 +49,10 @@ public abstract class Role {
             UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
+            EcoSystem business);
+    
+    public abstract JPanel createCustomerWorkArea(JPanel userProcessContainer, 
+            UserAccount account, 
             EcoSystem business);
 
     @Override

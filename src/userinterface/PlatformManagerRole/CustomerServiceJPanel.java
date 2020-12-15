@@ -7,6 +7,7 @@ package userinterface.PlatformManagerRole;
 
 import Business.CustomerManager.CustomerManager;
 import Business.CustomerManager.CustomerManagerDirectory;
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.PlatformEnterprise;
 import Business.UserAccount.UserAccount;
@@ -28,14 +29,18 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
     //private Organization organization;
     private CustomerManagerDirectory custD;
     private PlatformEnterprise Denterprise;
+    private EcoSystem business;
     
-    public CustomerServiceJPanel(JPanel userProcessContainer, Enterprise enterprise ) {
+    public CustomerServiceJPanel(JPanel userProcessContainer, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.enterprise = enterprise;
         this.userProcessContainer = userProcessContainer;
+        this.business = business;
         //this.user = account;
         //this.organization =  organization;
         Denterprise = (PlatformEnterprise)enterprise;
+        
+        
         custD = Denterprise.getCustomerManagerDirectory();
         populateTable();
         
@@ -70,6 +75,9 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         createCbtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         backbtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 204, 153));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,7 +104,7 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        viewBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        viewBtn.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         viewBtn.setText("View Details");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,15 +115,15 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel1.setText("Manage Customer Manager >>");
 
-        deleteBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        deleteBtn.setText("Delete ");
+        deleteBtn.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/delete.png"))); // NOI18N
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
             }
         });
 
-        createCbtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        createCbtn.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         createCbtn.setText("Create Delivery Man");
         createCbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,68 +131,72 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Yu Gothic", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel2.setText("Organization: Customer Service");
+        jLabel2.setText("Customer Service");
 
         backbtn.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        backbtn.setText("Back");
+        backbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/back.png"))); // NOI18N
         backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtnActionPerformed(evt);
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/customerManager.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(227, 227, 227)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(151, 151, 151)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 68, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60)
-                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(createCbtn))
-                        .addGap(263, 263, 263))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(289, 289, 289))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216))))
+                    .addComponent(createCbtn)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129)
+                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(305, 305, 305))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(backbtn)
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(61, 61, 61)
                         .addComponent(jLabel2)
-                        .addGap(32, 32, 32)))
+                        .addGap(20, 20, 20)
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8)
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
+                .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewBtn)
-                    .addComponent(deleteBtn))
-                .addGap(33, 33, 33)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
                 .addComponent(createCbtn)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -206,15 +218,14 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int selectedrow = jTable1.getSelectedRow(); // get selected row number
         if(selectedrow >= 0){
-            CustomerManager a = (CustomerManager)jTable1.getValueAt(selectedrow, 0);
-
+//             (CustomerManager)jTable1.getValueAt(selectedrow,0);
+            CustomerManager a = custD.getcList().get(selectedrow);
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this Customer Manager?","Warning",JOptionPane.YES_NO_OPTION);
             //return int value
             if (dialogResult == JOptionPane.YES_OPTION){
-                Denterprise.getUserAccountDirectory().removeUserAccount(a.getUsername());
-                Denterprise.getEmployeeDirectory().deleteEmployee(a);
-
-                custD.deleteCustomerManager(a);
+                Denterprise.getUserAccountDirectory().getUserAccountList().remove(a);
+                Denterprise.getEmployeeDirectory().getEmployeeList().remove(a);
+                custD.getcList().remove(a);
                 JOptionPane.showMessageDialog(null,"This CustomerManager has been deleted.");
                 populateTable();
 
@@ -246,6 +257,7 @@ public class CustomerServiceJPanel extends javax.swing.JPanel {
     private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton viewBtn;

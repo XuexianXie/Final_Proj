@@ -5,10 +5,14 @@
  */
 package Business;
 
+import Business.CustomerRequst.CustomerRequst;
+import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
+import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +23,24 @@ public class EcoSystem extends Organization{
     
     private static EcoSystem business;
     private ArrayList<Network> networkList;
+    private UserAccountDirectory useraccountDirectory;
+    private ArrayList<CustomerRequst> customerRequstList;
+
+    public EcoSystem(UserAccountDirectory useraccountDirectory, String name) {
+        super(name);
+        this.useraccountDirectory = useraccountDirectory;
+    }
+    
+    public CustomerRequst createAndAddCustomerRequst(){
+        CustomerRequst customerRequst = new CustomerRequst();
+        if (customerRequstList == null){
+            customerRequstList = new ArrayList<>();
+        }
+        customerRequstList.add(customerRequst);
+        return customerRequst;
+    }
+    
+    
     public static EcoSystem getInstance(){
         if(business==null){
             business=new EcoSystem();
@@ -26,15 +48,13 @@ public class EcoSystem extends Organization{
         return business;
     }
     
+    
+   
+    
     public Network createAndAddNetwork(){
         Network network=new Network();
         networkList.add(network);
         return network;
-    }
-    
-   
-    public void deleteNetwork(Network c){
-         networkList.remove(c);
     }
     @Override
     public ArrayList<Role> getSupportedRole() {
@@ -45,14 +65,34 @@ public class EcoSystem extends Organization{
     private EcoSystem(){
         super(null);
         networkList=new ArrayList<Network>();
+        customerRequstList=new ArrayList<CustomerRequst>();
     }
 
     public ArrayList<Network> getNetworkList() {
         return networkList;
     }
+    
+    public ArrayList<CustomerRequst> getCustomerRequsts() {
+        return customerRequstList;
+    }
+    
+    public Network findNetwork(String n){
+        for(Network nw: networkList){
+            if(nw.toString().equals(n)){
+                return nw;
+            }
+        }
+        return null;
+    }
 
     public void setNetworkList(ArrayList<Network> networkList) {
         this.networkList = networkList;
+    }
+    
+    @Override
+    public UserAccountDirectory getUserAccountDirectory() {
+        
+        return userAccountDirectory;
     }
     
     public boolean checkIfUserIsUnique(String userName){

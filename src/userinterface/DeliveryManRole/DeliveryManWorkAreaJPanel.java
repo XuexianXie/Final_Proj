@@ -7,15 +7,18 @@ package userinterface.DeliveryManRole;
 
 import Business.DeliveryMan.DeliveryMan;
 import Business.DeliveryMan.DeliveryManDirectory;
+import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.DeliveryCompanyEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.WorkQueue;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -32,17 +35,21 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private DeliveryManDirectory dd;
     //private Organization organization;
+    private EcoSystem business;
+    private ArrayList<WorkRequest> orderList;
+    public WorkQueue wq;
     
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public DeliveryManWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,  Enterprise enterprise ) {
+    public DeliveryManWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,  Enterprise enterprise ,EcoSystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.enterprise = enterprise;
+        this.business = business;
         Denterprise = (DeliveryCompanyEnterprise)enterprise;
         dd = Denterprise.getDeliveryManDirectory();
         //this.organization = organization;
@@ -52,7 +59,14 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 valueLabel.setText(dm.getName());
             }
          }
-        
+        orderList = new ArrayList<WorkRequest>();
+        //显示的work request
+        wq = business.getWorkQueue();
+        for(WorkRequest wr: wq.getWorkRequestList()){
+            if(wr.getDeliverman().equals(userAccount)){
+                orderList.add(wr);
+            }
+        }
         //valueLabel.setText(userAccount.get);
         populateTable();
     }
@@ -60,15 +74,19 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     public void populateTable(){
         DefaultTableModel dtm = (DefaultTableModel) workRequestJTable.getModel();
         dtm.setRowCount(0);
-        for(WorkRequest a :  userAccount.getWorkQueue().getWorkRequestList()){
+        for(WorkRequest a : orderList){
             Object row[] = new Object[4];
-            row[0] = a;
-            row[1] = a.getSender(); 
-            row[2] = a.getReceiver();
-            row[3] = a.getStatus();
-            //SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-            //row[3] = df.format(a.getRequestDate());
             
+            row[0] = a.getCustomer(); 
+            row[1] = a.getEnterprise();
+            row[2] = a.getStatus();
+            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+            //报错吗？
+            if(a.getResolveDate()!=null){
+                row[3] = df.format(a.getResolveDate());
+            }else{
+                row[3] = "";
+            }
             dtm.addRow(row);
         }
     }
@@ -85,10 +103,12 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
         assignJButton = new javax.swing.JButton();
-        enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        finishJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -96,14 +116,14 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order", "Sender", "Receiver", "Status"
+                "Sender", "Receiver", "Status", "ResolveTime"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -115,37 +135,39 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(workRequestJTable);
-        if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
-            workRequestJTable.getColumnModel().getColumn(0).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(1).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(2).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(3).setResizable(false);
-        }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 380, 140));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 380, 140));
 
         assignJButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        assignJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/finish.png"))); // NOI18N
         assignJButton.setText("Accept");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignJButtonActionPerformed(evt);
             }
         });
-        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 80, -1));
+        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 150, 40));
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setIcon(new javax.swing.ImageIcon("E:\\Documents\\NetBeansProjects\\FinalSampleSkeleton\\FinalSampleSkeleton\\image\\deliveryman.png")); // NOI18N
-        enterpriseLabel.setMaximumSize(new java.awt.Dimension(40, 60));
-        enterpriseLabel.setMinimumSize(new java.awt.Dimension(20, 30));
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 280, 410));
-
-        valueLabel.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
+        valueLabel.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 130, -1));
+        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 130, -1));
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel1.setText("Delivery Man:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, 40));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 130, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/deliverymannnn.png"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 270, 410));
+
+        finishJButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        finishJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/image/finish.png"))); // NOI18N
+        finishJButton.setText("Order Finished");
+        finishJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finishJButtonActionPerformed(evt);
+            }
+        });
+        add(finishJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 180, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
@@ -154,13 +176,16 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         
         if (selectedRow >= 0){
             WorkRequest a = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+            if(a.getStatus().equals("Wait")){
+                //a.setEnterprise(userAccount);
+                a.setDeliverman(userAccount);
+                a.setStatus("Delivering");//    
+                JOptionPane.showMessageDialog(null, "The order is assigned to this delivery man.");
+                 populateTable();
+            }else{
+                JOptionPane.showMessageDialog(null, "The previous process must be completed first");
+            }
             
-            userAccount.getWorkQueue().addWorkRequest(a);
-            
-            a.setReceiver(userAccount);
-            a.setStatus("received");//    
-            JOptionPane.showMessageDialog(null, "The order is assigned to this delivery man.");
-            populateTable();
             
         }else{
             JOptionPane.showMessageDialog(null, "Please select any row.","Warning", JOptionPane.WARNING_MESSAGE);
@@ -169,10 +194,31 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_assignJButtonActionPerformed
 
+    private void finishJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishJButtonActionPerformed
+        int selectedRow = workRequestJTable.getSelectedRow();
+        
+        if (selectedRow >= 0){
+            WorkRequest a = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+            if(a.getStatus().equals("Delivering")){
+                //a.setEnterprise(userAccount);
+                a.setStatus("Delivered");//    
+                JOptionPane.showMessageDialog(null, "The order is delivered by this delivery man.");
+                 populateTable();
+            }else{
+                JOptionPane.showMessageDialog(null, "The previous process must be completed first");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select any row.","Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_finishJButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton;
-    private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JButton finishJButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel valueLabel;
     private javax.swing.JTable workRequestJTable;
